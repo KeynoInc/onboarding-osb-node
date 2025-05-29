@@ -47,7 +47,7 @@ export const startServer = async () => {
 
     const authenticator = await Authenticator.build({
       basicAuthUsername: process.env.BROKER_BASIC_USERNAME as string,
-      basicAuthPassword: process.env.BROKER_BASIC_USERNAME as string,
+      basicAuthPassword: process.env.BROKER_BASIC_PASSWORD as string,
       allowlistedIds: (process.env.BROKER_BEARER_IDENTITIES as string)?.split(
         ',',
       ),
