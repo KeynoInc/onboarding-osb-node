@@ -16,6 +16,7 @@ $GC_OBJECT_ID = Get-PropValuePutOnEnv $ConfigFile "GC_OBJECT_ID"
 $ICR_IMAGE = Get-PropValuePutOnEnv $ConfigFile "ICR_IMAGE"
 $ONBOARDING_ENV = Get-PropValuePutOnEnv $ConfigFile "ONBOARDING_ENV"
 $ICR_NAMESPACE_REGION = Get-PropValuePutOnEnv $ConfigFile "ICR_NAMESPACE_REGION"
+$ICR_RESOURCE_GROUP = Get-PropValuePutOnEnv $ConfigFile "ICR_RESOURCE_GROUP"
 
 $EMPTY = '""'
 Write-Host ""
@@ -25,7 +26,8 @@ if ([string]::IsNullOrEmpty($ICR_NAMESPACE_REGION) -or $ICR_NAMESPACE_REGION -eq
     [string]::IsNullOrEmpty($ONBOARDING_ENV) -or $ONBOARDING_ENV -eq $EMPTY -or
     [string]::IsNullOrEmpty($ICR_IMAGE) -or $ICR_IMAGE -eq $EMPTY -or
     [string]::IsNullOrEmpty($GC_OBJECT_ID) -or $GC_OBJECT_ID -eq $EMPTY -or
-    [string]::IsNullOrEmpty($BROKER_ICR_NAMESPACE_URL) -or $BROKER_ICR_NAMESPACE_URL -eq $EMPTY) {
+    [string]::IsNullOrEmpty($BROKER_ICR_NAMESPACE_URL) -or $BROKER_ICR_NAMESPACE_URL -eq $EMPTY -or
+    [string]::IsNullOrEmpty($ICR_RESOURCE_GROUP) -or $ICR_RESOURCE_GROUP -eq $EMPTY) {
 
     Write-Host ""
     Write-Host "*******************************************************************************"
@@ -35,7 +37,8 @@ if ([string]::IsNullOrEmpty($ICR_NAMESPACE_REGION) -or $ICR_NAMESPACE_REGION -eq
     Write-Host "*******************************************************************************"
     Write-Host ""
     exit 1
-} else {
+}
+else {
     Write-Host "Ok"
 }
 
@@ -55,6 +58,7 @@ if ([string]::IsNullOrEmpty($env:DEPLOYMENT_IAM_API_KEY) -or $env:DEPLOYMENT_IAM
     Write-Host "*******************************************************************************"
     Write-Host ""
     exit 1
-} else {
+}
+else {
     Write-Host "Ok"
 }

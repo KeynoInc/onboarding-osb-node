@@ -1,11 +1,17 @@
-# Use the official Node.js image as the base image
-FROM node:20 as builder
+# Build stage
+FROM node:20-slim AS builder
+WORKDIR /usr/src/app
+COPY package.json yarn.lock tsconfig.json ./
+COPY src ./src
+RUN yarn install --frozen-lockfile
+RUN yarn build
 
-RUN apt-get update
-
-RUN apt-get install -y jq
-
-RUN node -version
-
-RUN curl -sL https://raw.githubusercontent.com/IBM-Cloud/ibm-cloud-developer-tools/master/linux-installer/idt-installer | bash \
- && ibmcloud plugin install code-engine
+# Production stage
+FROM node:20-slim
+WORKDIR /app
+COPY --from=builder /usr/src/app/dist ./dist
+COPY package.json . 
+# No node_modules copied!
+ENV NODE_ENV=production
+EXPOSE 3001
+ENTRYPOINT ["node", "dist/app.js"]

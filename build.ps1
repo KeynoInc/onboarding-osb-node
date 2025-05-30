@@ -47,7 +47,7 @@ function Get-Catalog {
     Write-Host "*******************************************************************************"
     Write-Host ""
     & ./deploy/get_catalog_json.ps1
-    #docker run --entrypoint "powershell ./deploy/get_catalog_json.ps1" -v "${PWD}:/osb-app" -i --workdir /osb-app --env-file deploy/build.config.properties -e DEPLOYMENT_IAM_API_KEY=$env:DEPLOYMENT_IAM_API_KEY -e ONBOARDING_IAM_API_KEY=$env:ONBOARDING_IAM_API_KEY --name osb-container-catalog osb-node-img
+    #docker run --entrypoint "powershell ./deploy/get_catalog_json.ps1" -v "${PWD}:/osb-node-app" -i --workdir /osb-node-app --env-file deploy/build.config.properties -e DEPLOYMENT_IAM_API_KEY=$env:DEPLOYMENT_IAM_API_KEY -e ONBOARDING_IAM_API_KEY=$env:ONBOARDING_IAM_API_KEY --name osb-container-catalog osb-node-img
 }
 
 function Build {
@@ -108,20 +108,19 @@ function Build-Deploy-CE {
 
 function Build-Job {
     Write-Host "starting build..."
+    Get-Catalog
     Write-Host "`n*******************************************************************************"
     Write-Host "Building docker image for environment"
     Write-Host "*******************************************************************************"
     Write-Host ""
     Write-Host "This may take a while. don't terminate process..."
-    docker build -q -f deploy/Dockerfile -t osb-node-img "${PWD}"
-    Get-Catalog
-    # Write-Host "`n*******************************************************************************"
-    # Write-Host "Building and pushing image to ibm container registry"
-    # Write-Host "*******************************************************************************"
-    # Write-Host ""
-    #docker run --entrypoint "powershell ./deploy/handle_icr_namespace.ps1" -v "${PWD}:/osb-app" -i --workdir /osb-app --env-file deploy/build.config.properties -e DEPLOYMENT_IAM_API_KEY=$env:DEPLOYMENT_IAM_API_KEY -e ONBOARDING_IAM_API_KEY=$env:ONBOARDING_IAM_API_KEY --name osb-container-namespace osb-node-img
-    #docker run --entrypoint "powershell ./deploy/install.ps1" -v "${PWD}:/osb-app" -i --workdir /osb-app --env-file deploy/build.config.properties --name osb-container-build osb-node-img
-    #& ./deploy/build_image.ps1 "${PWD}"
+    docker build -q -f deploy/Dockerfile -t osb-node-img $PWD.Path
+    Write-Host "`n*******************************************************************************"
+    Write-Host "Building and pushing image to ibm container registry"
+    Write-Host "*******************************************************************************"
+    Write-Host ""
+    & ./deploy/handle_icr_namespace.ps1
+    & ./deploy/build_image.ps1 "${PWD}"
 }
 
 function Deploy-Job-CE {
@@ -132,7 +131,7 @@ function Deploy-Job-CE {
     Write-Host ""
     & ./deploy/ce/ce_export_env.ps1
     # PowerShell doesn't use 'export' - use $env: for environment variables
-    docker run --entrypoint "powershell ./deploy/ce/deploy_ce.ps1" -v "${PWD}:/osb-app" -i --workdir /osb-app --env-file deploy/ce/ce.config.properties -e METERING_API_KEY=$env:METERING_API_KEY -e DEPLOYMENT_IAM_API_KEY=$env:DEPLOYMENT_IAM_API_KEY --name osb-container-deploy-ce osb-node-img
+    docker run --entrypoint "powershell ./deploy/ce/deploy_ce.ps1" -v "${PWD}:/osb-node-app" -i --workdir /osb-node-app --env-file deploy/ce/ce.config.properties -e METERING_API_KEY=$env:METERING_API_KEY -e DEPLOYMENT_IAM_API_KEY=$env:DEPLOYMENT_IAM_API_KEY --name osb-container-deploy-ce osb-node-img
 }
 
 function Build-Env {

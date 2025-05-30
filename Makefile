@@ -37,7 +37,7 @@ get-catalog:
 	@echo "Getting catalog.json"
 	@echo "*******************************************************************************"
 	@echo ""
-	docker run --entrypoint "./deploy/get_catalog_json.sh" -v $(CURDIR):/osb-app -i --workdir /osb-app  --env-file deploy/build.config.properties -e DEPLOYMENT_IAM_API_KEY=${DEPLOYMENT_IAM_API_KEY} -e ONBOARDING_IAM_API_KEY=${ONBOARDING_IAM_API_KEY} --name osb-container-catalog osb-node-img
+	docker run --entrypoint "./deploy/get_catalog_json.sh" -v $(CURDIR):/osb-node-app -i --workdir /osb-node-app  --env-file deploy/build.config.properties -e DEPLOYMENT_IAM_API_KEY=${DEPLOYMENT_IAM_API_KEY} -e ONBOARDING_IAM_API_KEY=${ONBOARDING_IAM_API_KEY} --name osb-container-catalog osb-node-img
 
 build:
 	date +%s > _time_$@.txt
@@ -115,8 +115,8 @@ build-job:
 	@echo "Building and pushing image to ibm container registry"
 	@echo "*******************************************************************************"
 	@echo ""
-	docker run --entrypoint "./deploy/handle_icr_namespace.sh" -v $(CURDIR):/osb-app -i --workdir /osb-app  --env-file deploy/build.config.properties -e DEPLOYMENT_IAM_API_KEY=${DEPLOYMENT_IAM_API_KEY} -e ONBOARDING_IAM_API_KEY=${ONBOARDING_IAM_API_KEY} --name osb-container-namespace osb-node-img
-	docker run --entrypoint "./deploy/install.sh" -v $(CURDIR):/osb-app -i --workdir /osb-app  --env-file deploy/build.config.properties --name osb-container-build osb-node-img
+	docker run --entrypoint "./deploy/handle_icr_namespace.sh" -v $(CURDIR):/osb-node-app -i --workdir /osb-node-app  --env-file deploy/build.config.properties -e DEPLOYMENT_IAM_API_KEY=${DEPLOYMENT_IAM_API_KEY} -e ONBOARDING_IAM_API_KEY=${ONBOARDING_IAM_API_KEY} --name osb-container-namespace osb-node-img
+	docker run --entrypoint "./deploy/install.sh" -v $(CURDIR):/osb-node-app -i --workdir /osb-node-app  --env-file deploy/build.config.properties --name osb-container-build osb-node-img
 	@./deploy/build_image.sh $(CURDIR)
 
 deploy-job-ce:
@@ -128,7 +128,7 @@ deploy-job-ce:
 	@echo ""
 	@./deploy/ce/ce_export_env.sh
 	$(shell export $(cat deploy/ce/ce.config.properties | xargs) > /dev/null)
-	docker run --entrypoint "./deploy/ce/deploy_ce.sh" -v $(CURDIR):/osb-app -i --workdir /osb-app  --env-file deploy/ce/ce.config.properties -e METERING_API_KEY=${METERING_API_KEY} -e DEPLOYMENT_IAM_API_KEY=${DEPLOYMENT_IAM_API_KEY} --name osb-container-deploy-ce osb-node-img
+	docker run --entrypoint "./deploy/ce/deploy_ce.sh" -v $(CURDIR):/osb-node-app -i --workdir /osb-node-app  --env-file deploy/ce/ce.config.properties -e METERING_API_KEY=${METERING_API_KEY} -e DEPLOYMENT_IAM_API_KEY=${DEPLOYMENT_IAM_API_KEY} --name osb-container-deploy-ce osb-node-img
 
 build-env:
 	@./deploy/build_export_env.sh
