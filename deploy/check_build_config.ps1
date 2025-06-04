@@ -1,6 +1,6 @@
 $ConfigFile = "deploy/build.config.properties"
 
-# Helper to get value by key from properties file
+# Helper to get value by key from properties file and put it on environment variable
 function Get-PropValuePutOnEnv($file, $key) {
     $match = Select-String -Path $file -Pattern "^$key=" | Select-Object -First 1
     if ($match) {

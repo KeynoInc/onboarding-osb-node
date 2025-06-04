@@ -47,7 +47,6 @@ function Get-Catalog {
     Write-Host "*******************************************************************************"
     Write-Host ""
     & ./deploy/get_catalog_json.ps1
-    #docker run --entrypoint "powershell ./deploy/get_catalog_json.ps1" -v "${PWD}:/osb-node-app" -i --workdir /osb-node-app --env-file deploy/build.config.properties -e DEPLOYMENT_IAM_API_KEY=$env:DEPLOYMENT_IAM_API_KEY -e ONBOARDING_IAM_API_KEY=$env:ONBOARDING_IAM_API_KEY --name osb-container-catalog osb-node-img
 }
 
 function Build {
@@ -62,9 +61,8 @@ function Build {
         Write-Host ""
         & ./deploy/docker_login.ps1
         Build-Job
-        # Cleanup-Build
-        # $endTime = Get-Date
-        # & ./deploy/convert_time.ps1 -Seconds (($endTime - $startTime).TotalSeconds) -Job "build"
+        $endTime = Get-Date
+        & ./deploy/convert_time.ps1 -secs (($endTime - $startTime).TotalSeconds) -stage "build"
     } finally {
         Remove-Item "_time_build.txt" -ErrorAction SilentlyContinue
     }
@@ -78,9 +76,9 @@ function Deploy-CE {
         & ./deploy/ce/check_deploy_config_ce.ps1
         & ./deploy/docker_login.ps1
         Deploy-Job-CE
-        Cleanup-Deploy-CE
+        # Cleanup-Deploy-CE
         $endTime = Get-Date
-        & ./deploy/convert_time.ps1 -Seconds (($endTime - $startTime).TotalSeconds) -Job "deploy-ce"
+        & ./deploy/convert_time.ps1 -secs (($endTime - $startTime).TotalSeconds) -stage "deploy-ce"
     } finally {
         Remove-Item "_time_deploy-ce.txt" -ErrorAction SilentlyContinue
     }
@@ -97,10 +95,10 @@ function Build-Deploy-CE {
         & ./deploy/docker_login.ps1
         Build-Job
         Deploy-Job-CE
-        Cleanup-Build
         Cleanup-Deploy-CE
         $endTime = Get-Date
-        & ./deploy/convert_time.ps1 -Seconds (($endTime - $startTime).TotalSeconds) -Job "build-deploy-ce"
+        Write-Host $endTime - $startTime
+        & ./deploy/convert_time.ps1 -secs (($endTime - $startTime).TotalSeconds) -stage "build-deploy-ce"
     } finally {
         Remove-Item "_time_build-deploy-ce.txt" -ErrorAction SilentlyContinue
     }
@@ -130,8 +128,7 @@ function Deploy-Job-CE {
     Write-Host "*******************************************************************************"
     Write-Host ""
     & ./deploy/ce/ce_export_env.ps1
-    # PowerShell doesn't use 'export' - use $env: for environment variables
-    docker run --entrypoint "powershell ./deploy/ce/deploy_ce.ps1" -v "${PWD}:/osb-node-app" -i --workdir /osb-node-app --env-file deploy/ce/ce.config.properties -e METERING_API_KEY=$env:METERING_API_KEY -e DEPLOYMENT_IAM_API_KEY=$env:DEPLOYMENT_IAM_API_KEY --name osb-container-deploy-ce osb-node-img
+    & ./deploy/ce/deploy_ce.ps1
 }
 
 function Build-Env {
@@ -147,20 +144,8 @@ function Cleanup {
     Write-Host "Cleaning up in order components created"
     Write-Host "*******************************************************************************"
     Write-Host ""
-    Cleanup-Build
     Cleanup-Deploy-CE
     Write-Host "Full cleanup done."
-}
-
-function Cleanup-Build {
-    Write-Host "......cleaning up after build"
-    try { docker container stop osb-container-catalog | Out-Null } catch {}
-    try { docker container rm osb-container-catalog | Out-Null } catch {}
-    try { docker container stop osb-container-namespace | Out-Null } catch {}
-    try { docker container rm osb-container-namespace | Out-Null } catch {}
-    try { docker container stop osb-container-build | Out-Null } catch {}
-    try { docker container rm osb-container-build | Out-Null } catch {}
-    Write-Host "Done."
 }
 
 function Cleanup-Deploy-CE {

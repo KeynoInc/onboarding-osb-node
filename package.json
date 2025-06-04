@@ -12,6 +12,7 @@
   "scripts": {
     "clean": "rm -rf dist",
     "build": "yarn clean && tsc",
+    "esbuild": "yarn clean && ts-node esbuild.config.js",
     "start": "yarn clean && tsc && node dist/src/app.js",
     "start:dev": "nodemon -L src/app.ts",
     "start:debug": "nodemon -L --exec 'node --inspect=0.0.0.0:9229 -r ts-node/register' src/app.ts",
@@ -46,8 +47,8 @@
     "pg": "^8.11.0",
     "reflect-metadata": "^0.2.2",
     "tsconfig-paths": "^4.2.0",
-    "typeorm": "^0.3.20",
-    "winston": "^3.13.0"
+    "typeorm": "^0.3.24",
+    "winston": "^3.17.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",
@@ -63,6 +64,7 @@
     "@typescript-eslint/parser": "^7.12.0",
     "concurrently": "^8.2.2",
     "cross-env": "^7.0.3",
+    "esbuild": "^0.25.5",
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-import-resolver-typescript": "^3.6.3",

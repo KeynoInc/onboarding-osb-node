@@ -292,19 +292,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 1316.59785
+                      "price": 1331.73525
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 1141.05147
+                      "price": 1154.17055
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 877.7319
+                      "price": 887.8235
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 702.18552
+                      "price": 710.2588
                     }
                   ]
                 },
@@ -336,19 +336,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 2079.4500000000003
+                      "price": 2092.125
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 1802.19
+                      "price": 1813.175
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 1386.3000000000002
+                      "price": 1394.75
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 1109.04
+                      "price": 1115.8
                     }
                   ]
                 },
@@ -358,19 +358,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 2354.049
+                      "price": 2344.29945
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 2040.1758
+                      "price": 2031.72619
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 1569.366
+                      "price": 1562.8663000000001
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 1255.4928
+                      "price": 1250.29304
                     }
                   ]
                 },
@@ -468,19 +468,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 1225.95
+                      "price": 1247.325
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 1062.49
+                      "price": 1081.015
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 817.3000000000001
+                      "price": 831.55
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 653.84
+                      "price": 665.24
                     }
                   ]
                 },
@@ -512,19 +512,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 2528.65815
+                      "price": 2539.575
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 2191.5037300000004
+                      "price": 2200.965
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 1685.7721000000001
+                      "price": 1693.05
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 1348.61768
+                      "price": 1354.44
                     }
                   ]
                 },
@@ -556,19 +556,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 9829.65
+                      "price": 9933.75
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 8519.029999999999
+                      "price": 8609.25
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 6553.099999999999
+                      "price": 6622.5
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 5242.48
+                      "price": 5298
                     }
                   ]
                 },
@@ -600,19 +600,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 1129.47555
+                      "price": 1122.4605000000001
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 978.87881
+                      "price": 972.7991000000001
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 752.9837
+                      "price": 748.307
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 602.38696
+                      "price": 598.6456000000001
                     }
                   ]
                 },
@@ -644,19 +644,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 25314750
+                      "price": 24619500
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 21939450
+                      "price": 21336900
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 16876500
+                      "price": 16413000
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 13501200
+                      "price": 13130400
                     }
                   ]
                 },
@@ -666,19 +666,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 128066.25
+                      "price": 128454.375
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 110990.75
+                      "price": 111327.125
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 85377.5
+                      "price": 85636.25
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 68302
+                      "price": 68509
                     }
                   ]
                 },
@@ -688,19 +688,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 213382.5
+                      "price": 216967.50000000003
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 184931.5
+                      "price": 188038.5
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 142255
+                      "price": 144645
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 113804
+                      "price": 115716.00000000001
                     }
                   ]
                 },
@@ -710,19 +710,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 2134357.5
+                      "price": 2090730
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 1849776.5
+                      "price": 1811966
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 1422905
+                      "price": 1393820
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 1138324
+                      "price": 1115056
                     }
                   ]
                 },
@@ -754,19 +754,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 15749.475
+                      "price": 15430.575
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 13649.545000000002
+                      "price": 13373.165
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 10499.650000000001
+                      "price": 10287.050000000001
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 8399.720000000001
+                      "price": 8229.640000000001
                     }
                   ]
                 },
@@ -798,19 +798,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 14426.324999999999
+                      "price": 14488.199999999999
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 12502.814999999999
+                      "price": 12556.439999999999
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 9617.55
+                      "price": 9658.8
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 7694.04
+                      "price": 7727.039999999999
                     }
                   ]
                 },
@@ -864,27 +864,27 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 28206.75
+                      "price": 26929.949999999997
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 24445.850000000002
+                      "price": 23339.289999999997
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 18804.5
+                      "price": 17953.3
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 15043.6
+                      "price": 14362.64
                     }
                   ]
                 }
               ],
               "usage_cap_qty": 0,
               "display_cap": 0,
-              "effective_from": "2025-05-06T20:12:33.355Z",
-              "effective_until": "2025-05-31T23:59:59.999Z",
+              "effective_from": "2025-06-01T00:00:00Z",
+              "effective_until": "9999-12-31T00:00:00Z",
               "additional_properties": {
                 "included_quantities": {
                   "account": 0,
@@ -969,19 +969,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 1597.472058
+                      "price": 1615.83877
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 1369.261764
+                      "price": 1385.00466
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 1070.832918
+                      "price": 1083.14467
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 807.5133480000001
+                      "price": 816.7976199999999
                     }
                   ]
                 },
@@ -1013,19 +1013,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 2523.0660000000003
+                      "price": 2538.4449999999997
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 2162.628
+                      "price": 2175.81
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 1691.286
+                      "price": 1701.595
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 1275.3960000000002
+                      "price": 1283.1699999999998
                     }
                   ]
                 },
@@ -1035,19 +1035,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 2856.2461200000002
+                      "price": 2844.416666
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 2448.21096
+                      "price": 2438.071428
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 1914.62652
+                      "price": 1906.696886
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 1443.81672
+                      "price": 1437.836996
                     }
                   ]
                 },
@@ -1145,19 +1145,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 1487.486
+                      "price": 1513.421
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 1274.988
+                      "price": 1297.218
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 997.106
+                      "price": 1014.491
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 751.916
+                      "price": 765.0260000000001
                     }
                   ]
                 },
@@ -1189,19 +1189,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 3068.105222
+                      "price": 3081.351
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 2629.8044760000002
+                      "price": 2641.158
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 2056.641962
+                      "price": 2065.5209999999997
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 1550.9103320000002
+                      "price": 1557.606
                     }
                   ]
                 },
@@ -1233,19 +1233,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 11926.642
+                      "price": 12052.949999999999
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 10222.836
+                      "price": 10331.099999999999
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 7994.781999999999
+                      "price": 8079.45
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 6028.852
+                      "price": 6092.7
                     }
                   ]
                 },
@@ -1277,19 +1277,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 1370.4303340000001
+                      "price": 1361.91874
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 1174.6545720000001
+                      "price": 1167.3589200000001
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 918.640114
+                      "price": 912.9345400000001
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 692.745004
+                      "price": 688.44244
                     }
                   ]
                 },
@@ -1321,19 +1321,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 30715230
+                      "price": 29871660
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 26327340
+                      "price": 25604280
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 20589330
+                      "price": 20023860
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 15526380
+                      "price": 15099960
                     }
                   ]
                 },
@@ -1343,19 +1343,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 155387.05
+                      "price": 155857.975
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 133188.9
+                      "price": 133592.55000000002
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 104160.55
+                      "price": 104476.225
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 78547.3
+                      "price": 78785.35
                     }
                   ]
                 },
@@ -1365,19 +1365,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 258904.1
+                      "price": 263253.9
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 221917.8
+                      "price": 225646.2
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 173551.1
+                      "price": 176466.90000000002
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 130874.59999999999
+                      "price": 133073.40000000002
                     }
                   ]
                 },
@@ -1387,19 +1387,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 2589687.1
+                      "price": 2536752.4
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 2219731.8
+                      "price": 2174359.1999999997
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 1735944.0999999999
+                      "price": 1700460.4
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 1309072.5999999999
+                      "price": 1282314.4
                     }
                   ]
                 },
@@ -1431,19 +1431,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 19109.363
+                      "price": 18722.431
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 16379.454000000002
+                      "price": 16047.798
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 12809.573
+                      "price": 12550.201000000001
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 9659.678
+                      "price": 9464.086000000001
                     }
                   ]
                 },
@@ -1475,19 +1475,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 17503.941
+                      "price": 17579.016
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 15003.377999999999
+                      "price": 15067.728
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 11733.411
+                      "price": 11783.735999999999
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 8848.145999999999
+                      "price": 8886.096
                     }
                   ]
                 },
@@ -1541,27 +1541,27 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 34224.19
+                      "price": 32675.005999999998
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 29335.02
+                      "price": 28007.147999999997
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 22941.49
+                      "price": 21903.025999999998
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 17300.14
+                      "price": 16517.036
                     }
                   ]
                 }
               ],
               "usage_cap_qty": 0,
               "display_cap": 0,
-              "effective_from": "2025-05-09T16:21:43.507Z",
-              "effective_until": "2025-05-31T23:59:59.999Z",
+              "effective_from": "2025-06-01T00:00:00Z",
+              "effective_until": "9999-12-31T00:00:00Z",
               "additional_properties": {
                 "included_quantities": {
                   "account": 0,
@@ -1646,19 +1646,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 1799.350395
+                      "price": 1820.038175
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 1562.362782
+                      "price": 1580.32583
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 1246.379298
+                      "price": 1260.70937
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 1035.723642
+                      "price": 1047.63173
                     }
                   ]
                 },
@@ -1690,19 +1690,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 2841.915
+                      "price": 2859.2374999999997
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 2467.614
+                      "price": 2482.6549999999997
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 1968.546
+                      "price": 1980.5449999999998
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 1635.834
+                      "price": 1645.8049999999998
                     }
                   ]
                 },
@@ -1712,19 +1712,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 3217.2003
+                      "price": 3203.875915
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 2793.47148
+                      "price": 2781.9020140000002
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 2228.4997200000003
+                      "price": 2219.270146
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 1851.85188
+                      "price": 1844.182234
                     }
                   ]
                 },
@@ -1822,19 +1822,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 1675.4650000000001
+                      "price": 1704.6775
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 1454.794
+                      "price": 1480.159
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 1160.566
+                      "price": 1180.801
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 964.414
+                      "price": 981.229
                     }
                   ]
                 },
@@ -1866,19 +1866,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 3455.832805
+                      "price": 3470.7525
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 3000.6743380000003
+                      "price": 3013.629
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 2393.796382
+                      "price": 2404.131
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 1989.211078
+                      "price": 1997.799
                     }
                   ]
                 },
@@ -1910,19 +1910,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 13433.855
+                      "price": 13576.125
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 11664.518
+                      "price": 11788.05
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 9305.402
+                      "price": 9403.949999999999
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 7732.657999999999
+                      "price": 7814.549999999999
                     }
                   ]
                 },
@@ -1954,19 +1954,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 1543.616585
+                      "price": 1534.02935
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 1340.310986
+                      "price": 1331.98646
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 1069.236854
+                      "price": 1062.5959400000002
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 888.5207660000001
+                      "price": 883.0022600000001
                     }
                   ]
                 },
@@ -1998,19 +1998,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 34596825
+                      "price": 33646650
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 30040170
+                      "price": 29215140
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 23964630
+                      "price": 23306460
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 19914270
+                      "price": 19367340
                     }
                   ]
                 },
@@ -2020,19 +2020,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 175023.875
+                      "price": 175554.3125
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 151971.94999999998
+                      "price": 152432.525
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 121236.05
+                      "price": 121603.475
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 100745.45
+                      "price": 101050.77500000001
                     }
                   ]
                 },
@@ -2042,19 +2042,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 291622.75
+                      "price": 296522.25
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 253213.9
+                      "price": 257468.1
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 202002.1
+                      "price": 205395.90000000002
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 167860.9
+                      "price": 170681.1
                     }
                   ]
                 },
@@ -2064,19 +2064,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 2916955.25
+                      "price": 2857331
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 2532770.9
+                      "price": 2480999.6
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 2020525.0999999999
+                      "price": 1979224.4
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 1679027.9
+                      "price": 1644707.5999999999
                     }
                   ]
                 },
@@ -2108,19 +2108,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 21524.2825
+                      "price": 21088.452500000003
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 18689.377
+                      "price": 18310.949
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 14909.503
+                      "price": 14607.611
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 12389.587000000001
+                      "price": 12138.719000000001
                     }
                   ]
                 },
@@ -2152,19 +2152,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 19715.9775
+                      "price": 19800.539999999997
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 17119.238999999998
+                      "price": 17192.664
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 13656.921
+                      "price": 13715.496
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 11348.708999999999
+                      "price": 11397.384
                     }
                   ]
                 },
@@ -2218,27 +2218,27 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 38549.225
+                      "price": 36804.265
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 33472.01
+                      "price": 31956.873999999996
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 26702.390000000003
+                      "price": 25493.685999999998
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 22189.31
+                      "price": 21184.894
                     }
                   ]
                 }
               ],
               "usage_cap_qty": 0,
               "display_cap": 0,
-              "effective_from": "2025-05-09T16:32:08.967Z",
-              "effective_until": "2025-05-31T23:59:59.999Z",
+              "effective_from": "2025-06-01T00:00:00Z",
+              "effective_until": "9999-12-31T00:00:00Z",
               "additional_properties": {
                 "included_quantities": {
                   "account": 0,
@@ -2323,19 +2323,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 2080.224603
+                      "price": 2104.141695
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 1790.5730760000001
+                      "price": 1811.15994
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 1439.480316
+                      "price": 1456.03054
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 1141.05147
+                      "price": 1154.17055
                     }
                   ]
                 },
@@ -2367,19 +2367,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 3285.5310000000004
+                      "price": 3305.5575
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 2828.052
+                      "price": 2845.29
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 2273.532
+                      "price": 2287.39
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 1802.19
+                      "price": 1813.175
                     }
                   ]
                 },
@@ -2389,19 +2389,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 3719.3974200000002
+                      "price": 3703.993131
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 3201.50664
+                      "price": 3188.247252
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 2573.76024
+                      "price": 2563.100732
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 2040.1758
+                      "price": 2031.72619
                     }
                   ]
                 },
@@ -2499,19 +2499,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 1937.001
+                      "price": 1970.7735
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 1667.2920000000001
+                      "price": 1696.362
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 1340.372
+                      "price": 1363.742
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 1062.49
+                      "price": 1081.015
                     }
                   ]
                 },
@@ -2543,19 +2543,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 3995.2798770000004
+                      "price": 4012.5285
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 3438.975084
+                      "price": 3453.8219999999997
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 2764.666244
+                      "price": 2776.602
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 2191.5037300000004
+                      "price": 2200.965
                     }
                   ]
                 },
@@ -2587,19 +2587,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 15530.847
+                      "price": 15695.324999999999
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 13368.323999999999
+                      "price": 13509.9
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 10747.083999999999
+                      "price": 10860.9
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 8519.029999999999
+                      "price": 8609.25
                     }
                   ]
                 },
@@ -2631,19 +2631,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 1784.571369
+                      "price": 1773.4875900000002
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 1536.0867480000002
+                      "price": 1526.54628
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 1234.893268
+                      "price": 1227.22348
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 978.87881
+                      "price": 972.7991000000001
                     }
                   ]
                 },
@@ -2675,19 +2675,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 39997305
+                      "price": 38898810
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 34428060
+                      "price": 33482520
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 27677460
+                      "price": 26917320
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 21939450
+                      "price": 21336900
                     }
                   ]
                 },
@@ -2697,19 +2697,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 202344.675
+                      "price": 202957.9125
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 174170.1
+                      "price": 174697.95
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 140019.1
+                      "price": 140443.45
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 110990.75
+                      "price": 111327.125
                     }
                   ]
                 },
@@ -2719,19 +2719,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 337144.35
+                      "price": 342808.65
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 290200.2
+                      "price": 295075.80000000005
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 233298.19999999998
+                      "price": 237217.80000000002
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 184931.5
+                      "price": 188038.5
                     }
                   ]
                 },
@@ -2741,19 +2741,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 3372284.85
+                      "price": 3303353.4
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 2902726.1999999997
+                      "price": 2843392.8
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 2333564.2
+                      "price": 2285864.8
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 1849776.5
+                      "price": 1811966
                     }
                   ]
                 },
@@ -2785,19 +2785,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 24884.1705
+                      "price": 24380.308500000003
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 21419.286
+                      "price": 20985.582000000002
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 17219.426000000003
+                      "price": 16870.762000000002
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 13649.545000000002
+                      "price": 13373.165
                     }
                   ]
                 },
@@ -2829,19 +2829,19 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 22793.5935
+                      "price": 22891.356
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 19619.802
+                      "price": 19703.951999999997
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 15772.782
+                      "price": 15840.431999999999
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 12502.814999999999
+                      "price": 12556.439999999999
                     }
                   ]
                 },
@@ -2895,27 +2895,27 @@
                   "prices": [
                     {
                       "quantity_tier": 1,
-                      "price": 44566.665
+                      "price": 42549.320999999996
                     },
                     {
                       "quantity_tier": 5,
-                      "price": 38361.18
+                      "price": 36624.731999999996
                     },
                     {
                       "quantity_tier": 25,
-                      "price": 30839.38
+                      "price": 29443.411999999997
                     },
                     {
                       "quantity_tier": 100,
-                      "price": 24445.850000000002
+                      "price": 23339.289999999997
                     }
                   ]
                 }
               ],
               "usage_cap_qty": 0,
               "display_cap": 0,
-              "effective_from": "2025-05-09T16:34:32.02Z",
-              "effective_until": "2025-05-31T23:59:59.999Z",
+              "effective_from": "2025-06-01T00:00:00Z",
+              "effective_until": "9999-12-31T00:00:00Z",
               "additional_properties": {
                 "included_quantities": {
                   "account": 0,

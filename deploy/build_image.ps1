@@ -2,7 +2,7 @@ Write-Host ""
 Write-Host "---------- building project image ----------"
 Write-Host ""
 
-docker build -f Dockerfile -t $env:ICR_IMAGE $args[0]
+docker build -f Dockerfile -t $env:ICR_IMAGE $args[0] --debug
 docker tag $env:ICR_IMAGE "$env:BROKER_ICR_NAMESPACE_URL/$($env:ICR_IMAGE)"
 $RESULT = docker push "$env:BROKER_ICR_NAMESPACE_URL/$($env:ICR_IMAGE)"
 
