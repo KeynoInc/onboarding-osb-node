@@ -3,8 +3,6 @@ $configFile = "deploy/ce/ce.config.properties"
 # List of required config environment variables
 $requiredConfigVars = @(
     "APP_NAME",
-    "BROKER_USERNAME",
-    "BROKER_PASSWORD",
     "BROKER_ICR_NAMESPACE_URL",
     "CE_REGION",
     "CE_RESOURCE_GROUP",
@@ -22,6 +20,8 @@ $requiredSecretVars = @(
     "DB_USER_PWD",
     "DB_NAME",
     "DB_CERT",
+    "BROKER_BASIC_USERNAME",
+    "BROKER_BASIC_PASSWORD",
     "BROKER_BEARER_IDENTITIES"
 )
 
@@ -42,13 +42,9 @@ function Get-PropValuePutOnEnv($file, $key) {
 }
 
 # Read config values from file and set as env variables
-foreach ($key in $requiredConfigVars) {
+$allVariable = $requiredSecretVars + $requiredConfigVars + $optionalSecretVars
+foreach ($key in $allVariable) {
     Set-Variable -Name $key -Value (Get-PropValuePutOnEnv $configFile $key)
-}
-
-# Also set DB_* and DB_CERT if present in config (not required for checks)
-foreach ($key in @("DB_HOST", "DB_PORT", "DB_USER", "DB_USER_PWD", "DB_NAME", "DB_CERT")) {
-    Get-PropValuePutOnEnv $configFile $key | Out-Null
 }
 
 $EMPTY = '""'

@@ -60,8 +60,8 @@ if ($APP_EXISTS -match "OK") {
     Write-Host "This might take some time..."
     if (-not $env:METERING_API_KEY -or $env:METERING_API_KEY -eq $EMPTY) {
         $RESULT = ibmcloud ce application update --name $env:APP_NAME --image $fullImage --min 1 `
-            --env BROKER_USERNAME=$env:BROKER_USERNAME `
-            --env BROKER_PASSWORD=$env:BROKER_PASSWORD `
+            --env BROKER_BASIC_USERNAME=$env:BROKER_BASIC_USERNAME `
+            --env BROKER_BASIC_PASSWORD=$env:BROKER_BASIC_PASSWORD `
             --env BUILD_NUMBER=$BUILD_NUMBER `
             --env IAM_ENDPOINT=$IAM_ENDPOINT `
             --env USAGE_ENDPOINT=$USAGE_ENDPOINT `
@@ -76,8 +76,8 @@ if ($APP_EXISTS -match "OK") {
             --rs $env:CE_REGISTRY_SECRET_NAME 2>&1
     } else {
         $RESULT = ibmcloud ce application update --name $env:APP_NAME --image $fullImage --min 1 `
-            --env BROKER_USERNAME=$env:BROKER_USERNAME `
-            --env BROKER_PASSWORD=$env:BROKER_PASSWORD `
+            --env BROKER_BASIC_USERNAME=$env:BROKER_BASIC_USERNAME `
+            --env BROKER_BASIC_PASSWORD=$env:BROKER_BASIC_PASSWORD `
             --env BUILD_NUMBER=$BUILD_NUMBER `
             --env IAM_ENDPOINT=$IAM_ENDPOINT `
             --env USAGE_ENDPOINT=$USAGE_ENDPOINT `
@@ -99,8 +99,8 @@ if ($APP_EXISTS -match "OK") {
 	
     if (-not $env:METERING_API_KEY -or $env:METERING_API_KEY -eq $EMPTY) {
         $RESULT = ibmcloud ce application create --name $env:APP_NAME --image $fullImage --min 1 `
-            --env BROKER_USERNAME=$env:BROKER_USERNAME `
-            --env BROKER_PASSWORD=$env:BROKER_PASSWORD `
+            --env BROKER_BASIC_USERNAME=$env:BROKER_BASIC_USERNAME `
+            --env BROKER_BASIC_PASSWORD=$env:BROKER_BASIC_PASSWORD `
             --env BUILD_NUMBER=$BUILD_NUMBER `
             --env IAM_ENDPOINT=$IAM_ENDPOINT `
             --env USAGE_ENDPOINT=$USAGE_ENDPOINT `
@@ -115,8 +115,8 @@ if ($APP_EXISTS -match "OK") {
             --rs $env:CE_REGISTRY_SECRET_NAME 2>&1
     } else {
         $RESULT = ibmcloud ce application create --name $env:APP_NAME --image $fullImage --min 1 `
-            --env BROKER_USERNAME=$env:BROKER_USERNAME `
-            --env BROKER_PASSWORD=$env:BROKER_PASSWORD `
+            --env BROKER_BASIC_USERNAME=$env:BROKER_BASIC_USERNAME `
+            --env BROKER_BASIC_PASSWORD=$env:BROKER_BASIC_PASSWORD `
             --env BUILD_NUMBER=$BUILD_NUMBER `
             --env IAM_ENDPOINT=$IAM_ENDPOINT `
             --env USAGE_ENDPOINT=$USAGE_ENDPOINT `
@@ -137,8 +137,8 @@ if ($RESULT -match "OK") {
     $APP_URL = ibmcloud ce application get -n $env:APP_NAME -o url
     if (-not $env:METERING_API_KEY -or $env:METERING_API_KEY -eq $EMPTY) {
         $UPDATE_RESULT = ibmcloud ce application update --name $env:APP_NAME --image $fullImage --min 1 `
-            --env BROKER_USERNAME=$env:BROKER_USERNAME `
-            --env BROKER_PASSWORD=$env:BROKER_PASSWORD `
+            --env BROKER_BASIC_USERNAME=$env:BROKER_BASIC_USERNAME `
+            --env BROKER_BASIC_PASSWORD=$env:BROKER_BASIC_PASSWORD `
             --env BUILD_NUMBER=$BUILD_NUMBER `
             --env IAM_ENDPOINT=$IAM_ENDPOINT `
             --env USAGE_ENDPOINT=$USAGE_ENDPOINT `
@@ -156,8 +156,8 @@ if ($RESULT -match "OK") {
             --rs $env:CE_REGISTRY_SECRET_NAME 2>&1
     } else {
         $UPDATE_RESULT = ibmcloud ce application update --name $env:APP_NAME --image $fullImage --min 1 `
-            --env BROKER_USERNAME=$env:BROKER_USERNAME `
-            --env BROKER_PASSWORD=$env:BROKER_PASSWORD `
+            --env BROKER_BASIC_USERNAME=$env:BROKER_BASIC_USERNAME `
+            --env BROKER_BASIC_PASSWORD=$env:BROKER_BASIC_PASSWORD `
             --env BUILD_NUMBER=$BUILD_NUMBER `
             --env IAM_ENDPOINT=$IAM_ENDPOINT `
             --env USAGE_ENDPOINT=$USAGE_ENDPOINT `

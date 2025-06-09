@@ -17,8 +17,6 @@ function Get-PropValue {
 # List of config keys
 $keys = @(
     "APP_NAME",
-    "BROKER_USERNAME",
-    "BROKER_PASSWORD",
     "BROKER_ICR_NAMESPACE_URL",
     "ICR_IMAGE",
     "CE_PROJECT",
@@ -33,6 +31,8 @@ $keys = @(
     "DB_USER_PWD",
     "DB_NAME",
     "DB_CERT",
+    "BROKER_BASIC_USERNAME",
+    "BROKER_BASIC_PASSWORD",
     "BROKER_BEARER_IDENTITIES"
 )
 

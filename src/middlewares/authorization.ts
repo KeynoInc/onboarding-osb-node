@@ -95,7 +95,15 @@ export class Authenticator {
   }
 
   private authorizeBasicCredential(credential: string): boolean {
-    return credential === this.basicCredential
+    const result = credential === this.basicCredential
+
+    if (!result) {
+      logger.error(
+        `invalid basic credential provided - ${credential} - expected - ${this.basicCredential}`,
+      )
+    }
+
+    return result
   }
 
   private authorizeBearerCredential(credential: string): boolean {
