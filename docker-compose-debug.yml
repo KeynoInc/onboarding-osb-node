@@ -4,10 +4,10 @@ services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile.dev
+      dockerfile: Dockerfile.debug
     restart: always
     env_file:
-      - .env
+      - .env-debug
     ports:
       - "3001:3001"
       - "9229:9229"
@@ -32,7 +32,9 @@ services:
       - postgres
 
   postgres:
-    image: postgres:15
+    image: postgres:17
+    env_file:
+      - .env-debug
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_USER_PWD}
