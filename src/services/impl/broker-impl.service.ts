@@ -231,7 +231,7 @@ export class BrokerServiceImpl implements BrokerService {
     instance.region = region
     instance.context = JSON.stringify(request.context)
     instance.parameters = JSON.stringify(request.parameters)
-    instance.status = ServiceInstanceStatus.ACTIVE
+    instance.status = ServiceInstanceStatus.PROCESSING
     instance.enabled = true
     instance.createDate = new Date()
     instance.updateDate = new Date()
