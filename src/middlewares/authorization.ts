@@ -112,7 +112,10 @@ export class Authenticator {
     }
     const { id } = token
     if (!this.allowlistedIds.has(id)) {
-      logger.error('identity not allowed')
+      logger.error(`Error: ${id} identity not allowed`)
+      logger.info(
+        `Allowlisted identities -- ${Array.from(this.allowlistedIds).join(', ')} --`,
+      )
       return false
     }
     return true

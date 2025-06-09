@@ -72,6 +72,7 @@ if ($APP_EXISTS -match "OK") {
             --env DB_USER_PWD=$env:DB_USER_PWD `
             --env DB_NAME=$env:DB_NAME `
             --env DB_CERT=$env:DB_CERT `
+            --env BROKER_BEARER_IDENTITIES=$env:BROKER_BEARER_IDENTITIES `
             --rs $env:CE_REGISTRY_SECRET_NAME 2>&1
     } else {
         $RESULT = ibmcloud ce application update --name $env:APP_NAME --image $fullImage --min 1 `
@@ -87,6 +88,7 @@ if ($APP_EXISTS -match "OK") {
             --env DB_USER_PWD=$env:DB_USER_PWD `
             --env DB_NAME=$env:DB_NAME `
             --env DB_CERT=$env:DB_CERT `
+            --env BROKER_BEARER_IDENTITIES=$env:BROKER_BEARER_IDENTITIES `
             --env METERING_API_KEY=$env:METERING_API_KEY `
             --rs $env:CE_REGISTRY_SECRET_NAME 2>&1
     }
@@ -109,6 +111,7 @@ if ($APP_EXISTS -match "OK") {
             --env DB_USER_PWD=$env:DB_USER_PWD `
             --env DB_NAME=$env:DB_NAME `
             --env DB_CERT=$env:DB_CERT `
+            --env BROKER_BEARER_IDENTITIES=$env:BROKER_BEARER_IDENTITIES `
             --rs $env:CE_REGISTRY_SECRET_NAME 2>&1
     } else {
         $RESULT = ibmcloud ce application create --name $env:APP_NAME --image $fullImage --min 1 `
@@ -124,6 +127,7 @@ if ($APP_EXISTS -match "OK") {
             --env DB_USER_PWD=$env:DB_USER_PWD `
             --env DB_NAME=$env:DB_NAME `
             --env DB_CERT=$env:DB_CERT `
+            --env BROKER_BEARER_IDENTITIES=$env:BROKER_BEARER_IDENTITIES `
             --env METERING_API_KEY=$env:METERING_API_KEY `
             --rs $env:CE_REGISTRY_SECRET_NAME 2>&1
     }
@@ -145,6 +149,7 @@ if ($RESULT -match "OK") {
             --env DB_USER_PWD=$env:DB_USER_PWD `
             --env DB_NAME=$env:DB_NAME `
             --env DB_CERT=$env:DB_CERT `
+            --env BROKER_BEARER_IDENTITIES=$env:BROKER_BEARER_IDENTITIES `
             --env BROKER_URL=$APP_URL `
             --env DASHBOARD_URL=$APP_URL `
             --env METERING_API_KEY=$env:METERING_API_KEY `
@@ -163,6 +168,7 @@ if ($RESULT -match "OK") {
             --env DB_USER_PWD=$env:DB_USER_PWD `
             --env DB_NAME=$env:DB_NAME `
             --env DB_CERT=$env:DB_CERT `
+            --env BROKER_BEARER_IDENTITIES=$env:BROKER_BEARER_IDENTITIES `
             --env BROKER_URL=$APP_URL `
             --env DASHBOARD_URL=$APP_URL `
             --rs $env:CE_REGISTRY_SECRET_NAME 2>&1

@@ -95,7 +95,7 @@ function Build-Deploy-CE {
         & ./deploy/docker_login.ps1
         Build-Job
         Deploy-Job-CE
-        Cleanup-Deploy-CE
+        # Cleanup-Deploy-CE
         $endTime = Get-Date
         Write-Host $endTime - $startTime
         & ./deploy/convert_time.ps1 -secs (($endTime - $startTime).TotalSeconds) -stage "build-deploy-ce"

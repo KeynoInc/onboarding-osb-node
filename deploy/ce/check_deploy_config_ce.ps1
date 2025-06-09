@@ -21,7 +21,8 @@ $requiredSecretVars = @(
     "DB_USER",
     "DB_USER_PWD",
     "DB_NAME",
-    "DB_CERT"
+    "DB_CERT",
+    "BROKER_BEARER_IDENTITIES"
 )
 
 # Optional secret environment variables (warn if missing)
