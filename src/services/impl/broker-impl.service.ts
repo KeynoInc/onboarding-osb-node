@@ -99,6 +99,8 @@ export class BrokerServiceImpl implements BrokerService {
           throw new Error(`Invalid plan id: ${createServiceRequest.plan_id}`)
         }
 
+        //TODO: Check if the instanceId already exists but with different attributes then throw a 409 error, if not then skip the getServiceInstanceEntity method just return the found instance
+
         const serviceInstance = this.getServiceInstanceEntity(
           createServiceRequest,
           iamId,
@@ -107,7 +109,8 @@ export class BrokerServiceImpl implements BrokerService {
 
         const serviceInstanceRepository =
           AppDataSource.getRepository(ServiceInstance)
-        await serviceInstanceRepository.save(serviceInstance)
+        const createdServiceInstance =
+          await serviceInstanceRepository.save(serviceInstance)
 
         logger.info(
           `Service Instance created: instanceId: ${instanceId} status: ${serviceInstance.status} planId: ${plan.id}`,
@@ -116,10 +119,15 @@ export class BrokerServiceImpl implements BrokerService {
         const displayName = this.getServiceMetaDataByAttribute(
           BrokerServiceImpl.DISPLAY_NAME,
         )
-        const responseUrl = `${process.env.DASHBOARD_URL}${BrokerServiceImpl.PROVISION_STATUS_API}${displayName || this.catalog.getServiceDefinitions()[0].name}${BrokerServiceImpl.INSTANCE_ID}${instanceId}`
+        const responseUrl = `${process.env.DASHBOARD_URL}${BrokerServiceImpl.PROVISION_STATUS_API}${displayName ?? this.catalog.getServiceDefinitions()[0].name}${BrokerServiceImpl.INSTANCE_ID}${instanceId}`
+
+        logger.info(
+          `Provisioning response URL: ${responseUrl} for instanceId: ${instanceId}`,
+        )
 
         return plainToInstance(CreateServiceInstanceResponse, {
           dashboardUrl: responseUrl,
+          operation: createdServiceInstance.id,
         })
       } else {
         logger.error(
@@ -151,9 +159,9 @@ export class BrokerServiceImpl implements BrokerService {
   private getServiceMetaDataByAttribute(attribute: string): string | null {
     const service = this.catalog.services[0]
 
-    if (service && service.metadata) {
+    if (service?.metadata) {
       if (
-        Object.prototype.hasOwnProperty.call(service.metadata, attribute) &&
+        Object.hasOwn(service.metadata, attribute) &&
         service.metadata[attribute]
       ) {
         return service.metadata[attribute].toString()
@@ -169,8 +177,33 @@ export class BrokerServiceImpl implements BrokerService {
         `last_operation Response status: 200, body: ${instanceId} ${iamId}`,
       )
 
+      const serviceInstanceRepository =
+        AppDataSource.getRepository(ServiceInstance)
+      const serviceInstance = await serviceInstanceRepository.findOne({
+        where: { instanceId, iamId },
+      })
+
+      if (!serviceInstance) {
+        logger.error(`Service instance with ID ${instanceId} not found`)
+        throw new Error(`Service instance with ID ${instanceId} not found`)
+      }
+
+      logger.info(`Service instance found: ${JSON.stringify(serviceInstance)}`)
+
+      let operationState = OperationState.IN_PROGRESS
+
+      if (serviceInstance.status === ServiceInstanceStatus.ACTIVE) {
+        operationState = OperationState.SUCCEEDED
+      } else if (serviceInstance.status === ServiceInstanceStatus.FAILED) {
+        operationState = OperationState.FAILED
+      }
+
+      logger.info(
+        `Operation state for instance ${instanceId}: ${operationState}`,
+      )
+
       const response = {
-        [BrokerServiceImpl.INSTANCE_STATE]: OperationState.SUCCEEDED,
+        [BrokerServiceImpl.INSTANCE_STATE]: operationState,
       }
       return response
     } catch (error) {

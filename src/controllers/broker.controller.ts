@@ -43,6 +43,15 @@ export class BrokerController {
         `Create Service Instance request received: PUT /v2/service_instances/${instanceId}?accepts_incomplete=${acceptsIncomplete} request body: ${JSON.stringify(req.body)}`,
       )
 
+      if (!acceptsIncomplete) {
+        logger.warn('Accepts Incomplete is not set to true.')
+        res.status(422).json({
+          error: 'AsyncRequired',
+          description:
+            'This service plan requires client support for asynchronous service operations.',
+        })
+      }
+
       const iamId = BrokerUtil.getIamId(req) ?? ''
       const bluemixRegion =
         BrokerUtil.getHeaderValue(req, BrokerUtil.BLUEMIX_REGION_HEADER) ?? ''
@@ -61,10 +70,10 @@ export class BrokerController {
       )
 
       logger.info(
-        `Create Service Instance Response status: 201, body: ${JSON.stringify(response)}`,
+        `Create Service Instance Response status: 202, body: ${JSON.stringify(response)}`,
       )
 
-      res.status(200).json(response)
+      res.status(202).json(response)
     } catch (error) {
       logger.error(`Error provisioning service instance: ${error}`)
       next(error)
@@ -237,6 +246,8 @@ export class BrokerController {
       logger.info(
         `last_operation Response status: 200, body: ${JSON.stringify(response)}`,
       )
+
+      //TODO: implement the 410 for the case when the instance is not found should happen in our case because our deprovision is async
 
       res.status(200).json(response)
     } catch (error) {
