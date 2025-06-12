@@ -17,6 +17,7 @@ import { CatalogUtil } from '../../utils/catalogUtil'
 import { ServiceInstanceStatus } from '../../enums/service-instance-status'
 import { OperationState } from '../../enums/operation-state'
 import AppDataSource from '../../db/data-source'
+import { ServiceInstanceLastOperationResponse } from '../../models/response/service-instance-last-operation-response.model'
 
 export class BrokerServiceImpl implements BrokerService {
   dashboardUrl: string = process.env.DASHBOARD_URL || 'http://localhost:8080'
@@ -175,7 +176,7 @@ export class BrokerServiceImpl implements BrokerService {
     instanceId: string,
     iamId: string,
     operationId: string,
-  ): Promise<any> {
+  ): Promise<ServiceInstanceLastOperationResponse> {
     try {
       logger.info(
         `last_operation instanceId: ${instanceId} -- iamId: ${iamId} -- operationId: ${operationId}`,
@@ -242,12 +243,25 @@ export class BrokerServiceImpl implements BrokerService {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  public async getState(instanceId: string, iamId: string): Promise<any> {
+  public async getState(
+    instanceId: string,
+    iamId: string,
+  ): Promise<ServiceInstanceStateResponse> {
     try {
+      logger.info(
+        `Getting state for instanceId: ${instanceId} and iamId: ${iamId}`,
+      )
+
+      const serviceInstanceRepository =
+        AppDataSource.getRepository(ServiceInstance)
+      const serviceInstance = await serviceInstanceRepository.findOne({
+        where: { instanceId },
+      })
+
       const response: ServiceInstanceStateResponse = {
-        active: false,
-        enabled: false,
+        active: serviceInstance?.status === ServiceInstanceStatus.ACTIVE,
+        enabled: serviceInstance?.enabled ?? false,
+        status: serviceInstance?.status ?? ServiceInstanceStatus.PROCESSING,
       }
 
       return response

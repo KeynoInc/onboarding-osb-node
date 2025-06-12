@@ -1,4 +1,4 @@
-import { IsBoolean, IsOptional, IsNumber } from 'class-validator'
+import { IsBoolean, IsOptional, IsNumber, IsString } from 'class-validator'
 import { Expose } from 'class-transformer'
 
 export class ServiceInstanceStateResponse {
@@ -14,6 +14,10 @@ export class ServiceInstanceStateResponse {
   @IsNumber()
   @Expose({ name: 'last_active' })
   lastActive?: number
+
+  @IsOptional()
+  @IsString()
+  status?: string
 
   constructor(data: Partial<ServiceInstanceStateResponse>) {
     if (data) {

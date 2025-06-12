@@ -266,6 +266,15 @@ export class BrokerController {
       const instance_id = req.query.instance_id as string
       const type = req.query.type as string
 
+      logger.info(
+        `Get provision status request received: GET /provision_status?instance_id=${instance_id}&type=${type}`,
+      )
+
+      const instanceState = await this.brokerService.getState(
+        instance_id,
+        BrokerUtil.getIamId(req) ?? '',
+      )
+
       const homepage = `
         <html>
           <style>
@@ -302,6 +311,11 @@ export class BrokerController {
                 <div class="strong-div"><strong>Instance ID</strong></div>
                 <div>${instance_id}</div>
               </div>
+              <hr class="hr-short"/>
+              <div class="flex-row">
+                <div class="strong-div"><strong>Status</strong></div>
+                <div>${instanceState.status}</div>
+              </div>  
             </div>
           </body>
         </html>
