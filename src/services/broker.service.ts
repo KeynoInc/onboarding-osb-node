@@ -14,7 +14,11 @@ export interface BrokerService {
     serviceId: string,
     iamId: string,
   ): Promise<boolean>
-  lastOperation(instanceId: string, iamId: string): Promise<string>
+  lastOperation(
+    instanceId: string,
+    iamId: string,
+    operationId: string,
+  ): Promise<string>
   importCatalog(file: Express.Multer.File): Promise<string>
   getCatalog(): Promise<Catalog>
   updateState(

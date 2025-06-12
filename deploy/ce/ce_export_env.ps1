@@ -33,7 +33,10 @@ $keys = @(
     "DB_CERT",
     "BROKER_BASIC_USERNAME",
     "BROKER_BASIC_PASSWORD",
-    "BROKER_BEARER_IDENTITIES"
+    "BROKER_BEARER_IDENTITIES",
+    "METERING_API_KEY",
+    "DASHBOARD_URL",
+    "LOG_LEVEL"
 )
 
 # Build final export values

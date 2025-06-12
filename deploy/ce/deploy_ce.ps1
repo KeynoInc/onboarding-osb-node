@@ -151,7 +151,8 @@ if ($RESULT -match "OK") {
             --env DB_CERT=$env:DB_CERT `
             --env BROKER_BEARER_IDENTITIES=$env:BROKER_BEARER_IDENTITIES `
             --env BROKER_URL=$APP_URL `
-            --env DASHBOARD_URL=$APP_URL `
+            --env DASHBOARD_URL=$env:DASHBOARD_URL `
+            --env LOG_LEVEL=$env:LOG_LEVEL `
             --env METERING_API_KEY=$env:METERING_API_KEY `
             --rs $env:CE_REGISTRY_SECRET_NAME 2>&1
     } else {
@@ -170,7 +171,8 @@ if ($RESULT -match "OK") {
             --env DB_CERT=$env:DB_CERT `
             --env BROKER_BEARER_IDENTITIES=$env:BROKER_BEARER_IDENTITIES `
             --env BROKER_URL=$APP_URL `
-            --env DASHBOARD_URL=$APP_URL `
+            --env DASHBOARD_URL=$env:DASHBOARD_URL `
+            --env LOG_LEVEL=$env:LOG_LEVEL `
             --rs $env:CE_REGISTRY_SECRET_NAME 2>&1
     }
 

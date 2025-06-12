@@ -127,7 +127,7 @@ export class BrokerServiceImpl implements BrokerService {
 
         return plainToInstance(CreateServiceInstanceResponse, {
           dashboardUrl: responseUrl,
-          operation: createdServiceInstance.id,
+          operation: `${createdServiceInstance.id}`,
         })
       } else {
         logger.error(
@@ -171,20 +171,28 @@ export class BrokerServiceImpl implements BrokerService {
     return null
   }
 
-  public async lastOperation(instanceId: string, iamId: string): Promise<any> {
+  public async lastOperation(
+    instanceId: string,
+    iamId: string,
+    operationId: string,
+  ): Promise<any> {
     try {
       logger.info(
-        `last_operation Response status: 200, body: ${instanceId} ${iamId}`,
+        `last_operation instanceId: ${instanceId} -- iamId: ${iamId} -- operationId: ${operationId}`,
       )
+
+      const numericOperationId = Number(operationId)
+      if (isNaN(numericOperationId)) {
+        throw new Error(`Invalid operationId: ${operationId}`)
+      }
 
       const serviceInstanceRepository =
         AppDataSource.getRepository(ServiceInstance)
       const serviceInstance = await serviceInstanceRepository.findOne({
-        where: { instanceId, iamId },
+        where: { instanceId, id: numericOperationId },
       })
 
       if (!serviceInstance) {
-        logger.error(`Service instance with ID ${instanceId} not found`)
         throw new Error(`Service instance with ID ${instanceId} not found`)
       }
 
@@ -207,8 +215,7 @@ export class BrokerServiceImpl implements BrokerService {
       }
       return response
     } catch (error) {
-      logger.error('Error fetching last operation:', error)
-      throw new Error('Error fetching last operation')
+      throw new Error('Error fetching last operation', { cause: error })
     }
   }
 

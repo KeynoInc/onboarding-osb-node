@@ -36,7 +36,7 @@ if ([string]::IsNullOrEmpty($ICR_NAMESPACE_REGION) -or $ICR_NAMESPACE_REGION -eq
     Write-Host "Exiting..."
     Write-Host "*******************************************************************************"
     Write-Host ""
-    exit 1
+    return $false
 }
 else {
     Write-Host "Ok"
@@ -57,8 +57,10 @@ if ([string]::IsNullOrEmpty($env:DEPLOYMENT_IAM_API_KEY) -or $env:DEPLOYMENT_IAM
     Write-Host "Exiting..."
     Write-Host "*******************************************************************************"
     Write-Host ""
-    exit 1
+    return $false
 }
 else {
     Write-Host "Ok"
 }
+
+return $true

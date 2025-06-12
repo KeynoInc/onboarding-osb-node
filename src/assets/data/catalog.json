@@ -6,86 +6,45 @@
   "metadata": {
     "parameters": [
       {
-        "associations": null,
         "description": null,
         "displayname": "Number of Credit Cards:",
-        "hidden": null,
+        "hidden": false,
         "i18n": null,
         "invalidmessage": null,
         "layout": null,
         "name": "Number-of-Credit-Cards:",
+        "options": null,
         "optionsUrl": null,
         "pattern": null,
         "placeholder": null,
-        "readonly": null,
-        "required": null,
+        "readonly": false,
+        "required": false,
         "type": "text",
         "validationUrl": null,
         "value": null
       },
       {
-        "associations": null,
         "description": null,
         "displayname": "Number of Debit Cards:",
-        "hidden": null,
+        "hidden": false,
         "i18n": null,
         "invalidmessage": null,
         "layout": null,
         "name": "Number-of-Debit-Cards",
+        "options": null,
         "optionsUrl": null,
         "pattern": null,
         "placeholder": null,
-        "readonly": null,
-        "required": null,
+        "readonly": false,
+        "required": false,
         "type": "text",
         "validationUrl": null,
         "value": null
       },
       {
-        "associations": null,
-        "description": null,
-        "displayname": "Region:",
-        "hidden": null,
-        "i18n": null,
-        "invalidmessage": null,
-        "layout": null,
-        "name": "Region:",
-        "options": [
-          {
-            "displayname": "LAC",
-            "value": "LAC"
-          },
-          {
-            "displayname": "NA",
-            "value": "NA"
-          },
-          {
-            "displayname": "EU",
-            "value": "EU"
-          },
-          {
-            "displayname": "CEMEA",
-            "value": "CEMEA"
-          },
-          {
-            "displayname": "AP",
-            "value": "AP"
-          }
-        ],
-        "optionsUrl": null,
-        "pattern": null,
-        "placeholder": null,
-        "readonly": null,
-        "required": null,
-        "type": "dropdown",
-        "validationUrl": null,
-        "value": null
-      },
-      {
-        "associations": null,
         "description": null,
         "displayname": "Country:",
-        "hidden": null,
+        "hidden": false,
         "i18n": null,
         "invalidmessage": null,
         "layout": null,
@@ -93,35 +52,38 @@
         "options": [
           {
             "displayname": "Canada",
+            "i18n": null,
             "value": "Canada"
           },
           {
             "displayname": "France",
+            "i18n": null,
             "value": "France"
           },
           {
             "displayname": "Spain",
+            "i18n": null,
             "value": "Spain"
           },
           {
             "displayname": "USA",
+            "i18n": null,
             "value": "USA"
           }
         ],
         "optionsUrl": null,
         "pattern": null,
         "placeholder": null,
-        "readonly": null,
-        "required": null,
+        "readonly": false,
+        "required": false,
         "type": "text",
         "validationUrl": null,
         "value": null
       },
       {
-        "associations": null,
         "description": null,
         "displayname": "Brands:",
-        "hidden": null,
+        "hidden": false,
         "i18n": null,
         "invalidmessage": null,
         "layout": null,
@@ -129,27 +91,28 @@
         "options": [
           {
             "displayname": "Visa",
+            "i18n": null,
             "value": "Visa"
           },
           {
             "displayname": "MAC",
+            "i18n": null,
             "value": "MAC"
           }
         ],
         "optionsUrl": null,
         "pattern": null,
         "placeholder": null,
-        "readonly": null,
-        "required": null,
+        "readonly": false,
+        "required": false,
         "type": "checkbox",
         "validationUrl": null,
         "value": null
       },
       {
-        "associations": null,
         "description": null,
         "displayname": "3DS Provider:",
-        "hidden": null,
+        "hidden": false,
         "i18n": null,
         "invalidmessage": null,
         "layout": null,
@@ -157,51 +120,21 @@
         "options": [
           {
             "displayname": "VCAS",
+            "i18n": null,
             "value": "VCAS"
           },
           {
             "displayname": "Arcot",
+            "i18n": null,
             "value": "Arcot"
           }
         ],
         "optionsUrl": null,
         "pattern": null,
         "placeholder": null,
-        "readonly": null,
-        "required": null,
+        "readonly": false,
+        "required": false,
         "type": "dropdown",
-        "validationUrl": null,
-        "value": null
-      },
-      {
-        "associations": null,
-        "description": null,
-        "displayname": "Services:",
-        "hidden": null,
-        "i18n": null,
-        "invalidmessage": null,
-        "layout": null,
-        "name": "Services",
-        "options": [
-          {
-            "displayname": "dCVV2",
-            "value": "dCVV2"
-          },
-          {
-            "displayname": "Card Controls",
-            "value": "Card Controls"
-          },
-          {
-            "displayname": "3DS Stepup",
-            "value": "3DS Stepup"
-          }
-        ],
-        "optionsUrl": null,
-        "pattern": null,
-        "placeholder": null,
-        "readonly": null,
-        "required": null,
-        "type": "checkbox",
         "validationUrl": null,
         "value": null
       }
@@ -214,10 +147,10 @@
     "instructionsUrl": null,
     "featuredImageUrl": null,
     "termsUrl": null,
-    "longDescription": "placeholder",
+    "longDescription": "Debit and Credit Cards Fraud Prevention Solutions",
     "imageUrl": "https://cdn.prod.website-files.com/5ece793beb97a05e7f2bb781/662f9e4197140a2171e9c1ff_footer-logo-p-500.png",
     "smallImageUrl": null,
-    "updated": "2025-05-09T16:02:49.522015228-04:00"
+    "updated": "2025-06-10T15:56:17.942333089-04:00"
   },
   "description": "Card Security Vault",
   "name": "keyno-cvvkey",
@@ -226,7 +159,7 @@
     {
       "paid": true,
       "description": "dCVV2 LAC",
-      "name": "lac-dcvv2",
+      "name": "LAC-dCVV2",
       "id": "d27a68bd-fda5-4681-8408-9bcdf3dcb88f",
       "metadata": {
         "created": "2025-04-08T15:12:17.159203641-04:00",
@@ -895,8 +828,8 @@
           ],
           "type": "paid"
         },
-        "displayName": "lac-dcvv2",
-        "updated": "2025-05-09T15:56:05.214302206-04:00",
+        "displayName": "LAC-dCVV2",
+        "updated": "2025-06-10T15:58:54.850653312-04:00",
         "allowInternalUsers": false
       }
     },
@@ -1572,8 +1505,8 @@
           ],
           "type": "paid"
         },
-        "displayName": "lac-dcvv2-3ds",
-        "updated": "2025-05-09T15:55:47.999238932-04:00",
+        "displayName": "LAC-dCVV2-3DS",
+        "updated": "2025-06-10T15:59:27.485126949-04:00",
         "allowInternalUsers": false
       }
     },
@@ -2249,8 +2182,8 @@
           ],
           "type": "paid"
         },
-        "displayName": "lac-dcvv2-vtc",
-        "updated": "2025-05-09T15:56:33.993887961-04:00",
+        "displayName": "LAC-dCVV2-VTC",
+        "updated": "2025-06-10T15:59:44.179840045-04:00",
         "allowInternalUsers": false
       }
     },
@@ -2926,8 +2859,8 @@
           ],
           "type": "paid"
         },
-        "displayName": "lac-dcvv2-vtc-3ds",
-        "updated": "2025-05-09T15:56:20.621876691-04:00",
+        "displayName": "LAC-dCVV2-VTC-3DS",
+        "updated": "2025-06-10T16:00:11.345204436-04:00",
         "allowInternalUsers": false
       }
     }

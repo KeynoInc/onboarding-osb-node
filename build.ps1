@@ -46,7 +46,47 @@ function Get-Catalog {
     Write-Host "Getting catalog.json"
     Write-Host "*******************************************************************************"
     Write-Host ""
-    & ./deploy/get_catalog_json.ps1
+    $result = & ./deploy/get_catalog_json.ps1
+    if (-not $result) {
+        Write-Host "get_catalog_json.ps1 failed. Stopping build."
+        exit 1
+    }
+}
+
+function Invoke-Docker-Login {
+    Write-Host "`n*******************************************************************************"
+    Write-Host "Logging in to Docker"
+    Write-Host "*******************************************************************************"
+    Write-Host ""
+    $result = & ./deploy/docker_login.ps1
+    if (-not $result) {
+        Write-Host "docker_login.ps1 failed. Stopping build."
+        exit 1
+    }
+}
+
+function Invoke-Check-Build-Config {
+    Write-Host "`n*******************************************************************************"
+    Write-Host "Checking build config"
+    Write-Host "*******************************************************************************"
+    Write-Host ""
+    $result = & ./deploy/check_build_config.ps1
+    if (-not $result) {
+        Write-Host "check_build_config.ps1 failed. Stopping build."
+        exit 1
+    }
+}
+
+function Invoke-Check-Deploy-Config {
+    Write-Host "`n*******************************************************************************"
+    Write-Host "Checking deploy config"
+    Write-Host "*******************************************************************************"
+    Write-Host ""
+    $result = & ./deploy/ce/check_deploy_config_ce.ps1
+    if (-not $result) {
+        Write-Host "check_deploy_config_ce.ps1 failed. Stopping deploy."
+        exit 1
+    }
 }
 
 function Build {
@@ -54,12 +94,12 @@ function Build {
     try {
         Init
         Build-Env
-        & ./deploy/check_build_config.ps1
+        Invoke-Check-Build-Config
         Write-Host "`n*******************************************************************************"
         Write-Host "Logging to ibm container registry on docker"
         Write-Host "*******************************************************************************"
         Write-Host ""
-        & ./deploy/docker_login.ps1
+        Invoke-Docker-Login
         Build-Job
         $endTime = Get-Date
         & ./deploy/convert_time.ps1 -secs (($endTime - $startTime).TotalSeconds) -stage "build"
@@ -73,8 +113,8 @@ function Deploy-CE {
     try {
         Init
         Ce-Env
-        & ./deploy/ce/check_deploy_config_ce.ps1
-        & ./deploy/docker_login.ps1
+        Invoke-Check-Deploy-Config
+        Invoke-Docker-Login
         Deploy-Job-CE
         # Cleanup-Deploy-CE
         $endTime = Get-Date
@@ -90,9 +130,9 @@ function Build-Deploy-CE {
         Init
         Build-Env
         Ce-Env
-        & ./deploy/check_build_config.ps1
-        & ./deploy/ce/check_deploy_config_ce.ps1
-        & ./deploy/docker_login.ps1
+        Invoke-Check-Build-Config
+        Invoke-Check-Deploy-Config
+        Invoke-Docker-Login
         Build-Job
         Deploy-Job-CE
         # Cleanup-Deploy-CE

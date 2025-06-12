@@ -8,7 +8,9 @@ $requiredConfigVars = @(
     "CE_RESOURCE_GROUP",
     "CE_PROJECT",
     "CE_REGISTRY_SECRET_NAME",
-    "ICR_IMAGE"
+    "ICR_IMAGE",
+    "DASHBOARD_URL",
+    "LOG_LEVEL"
 )
 
 # List of required secret environment variables
@@ -71,8 +73,9 @@ if ($missingConfig.Count -gt 0) {
     Write-Host "Exiting..."
     Write-Host "*******************************************************************************"
     Write-Host ""
-    exit 1
-} else {
+    return $false
+}
+else {
     Write-Host "Ok"
 }
 
@@ -98,8 +101,9 @@ if ($missingSecrets.Count -gt 0) {
     Write-Host "Exiting..."
     Write-Host "*******************************************************************************"
     Write-Host ""
-    exit 1
-} else {
+    return $false
+}
+else {
     Write-Host "Ok"
 }
 
@@ -116,13 +120,16 @@ foreach ($key in $optionalSecretVars) {
 }
 
 if ($missingOptionalSecrets.Count -gt 0) {
-        Write-Host ""
-        Write-Host "*******************************************************************************"
-        Write-Host "$($missingOptionalSecrets -join ',') were not provided!"
-        Write-Host "options will not be available"
-        Write-Host "refer README to set values"
-        Write-Host "*******************************************************************************"
-        Write-Host ""
-    } else {
-        Write-Host "Ok"
-    }
+    Write-Host ""
+    Write-Host "*******************************************************************************"
+    Write-Host "$($missingOptionalSecrets -join ',') were not provided!"
+    Write-Host "options will not be available"
+    Write-Host "refer README to set values"
+    Write-Host "*******************************************************************************"
+    Write-Host ""
+}
+else {
+    Write-Host "Ok"
+}
+
+return $true

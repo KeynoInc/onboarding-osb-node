@@ -20,19 +20,21 @@ class BrokerUtil {
     try {
       const originatingIdentity = req.header(this.ORIGINATING_IDENTITY_HEADER)
 
+      logger.debug(`Originating Identity Header: ${originatingIdentity}`)
+
       if (originatingIdentity) {
         const strings = originatingIdentity.split(' ')
         const decoded = Base64.decode(strings[1])
         const iam: IAMIdentity = JSON.parse(decoded)
 
-        if (iam && iam.iam_id) {
+        if (iam?.iam_id) {
           return iam.iam_id
         }
       }
 
       return null
     } catch (error) {
-      logger.error(`Error parsing IAM identity: ${error}`)
+      logger.error(`Error parsing IAM identity: `, error)
       return null
     }
   }

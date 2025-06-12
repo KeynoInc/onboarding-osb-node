@@ -228,19 +228,24 @@ export class BrokerController {
   public fetchLastOperation: RequestHandler = async (req, res, next) => {
     try {
       const instanceId = req.params.instanceId
-      const operation = req.query.operation as string | undefined
+      const operationId = (req.query.operation ?? '') as string
       const planId = req.query.plan_id as string
       const serviceId = req.query.service_id as string
 
       logger.info(
-        `Get last_operation request received: GET /v2/service_instances/${instanceId}?operation=${operation}&plan_id=${planId}&service_id=${serviceId}`,
+        `Get last_operation request received: GET /v2/service_instances/${instanceId}?operation=${operationId}&plan_id=${planId}&service_id=${serviceId}`,
       )
 
       const originatingIdentity = BrokerUtil.getIamId(req) ?? ''
 
+      logger.debug(
+        `Originating Identity: ${originatingIdentity}, Instance ID: ${instanceId}`,
+      )
+
       const response = await this.brokerService.lastOperation(
         instanceId,
         originatingIdentity,
+        operationId,
       )
 
       logger.info(
@@ -251,7 +256,7 @@ export class BrokerController {
 
       res.status(200).json(response)
     } catch (error) {
-      logger.error(`Error fetching last operation: ${error}`)
+      logger.error(`Error fetching last operation:`, error)
       next(error)
     }
   }

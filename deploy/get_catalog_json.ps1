@@ -28,7 +28,7 @@ try {
     $access_token = $accessTokenResp.access_token
 } catch {
     Write-Host "Failed to get access token"
-    exit 1
+    return $false
 }
 
 Write-Host "Getting Catalog"
@@ -40,11 +40,11 @@ try {
     }
 } catch {
     Write-Host "Failed to get catalog from $catalogUri"
-    exit 1
+    return $false
 }
 
 if (-not $gcjson.name) {
-    exit 1
+    return $false
 } else {
     Write-Host "Catalog Json Received"
 }
@@ -127,3 +127,4 @@ $targetFile = "src/assets/data/catalog.json"
 $main_json | ConvertTo-Json -Depth 10 | Set-Content $targetFile -Encoding utf8
 
 Write-Host "Done."
+return $true
