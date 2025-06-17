@@ -11,6 +11,11 @@ export class UsageRoutes {
 
     router.post('/metering/:resourceId/usage', controller.sendUsageData)
 
+    router.post(
+      '/metering/all-active-instances',
+      controller.sendAllActiveInstancesUsageData,
+    )
+
     return router
   }
 }

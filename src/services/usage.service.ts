@@ -5,4 +5,6 @@ export interface UsageService {
     resourceId: string,
     meteringPayload: MeteringPayload,
   ): Promise<string>
+
+  sendAllActiveInstancesUsageData(): Promise<string[]>
 }

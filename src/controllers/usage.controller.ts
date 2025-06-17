@@ -28,4 +28,20 @@ export class UsageController {
       next(error)
     }
   }
+
+  public sendAllActiveInstancesUsageData: RequestHandler = async (
+    req,
+    res,
+    next,
+  ): Promise<void> => {
+    try {
+      logger.info('Request received: POST /usage/all-active-instances')
+
+      const response = await this.usageService.sendAllActiveInstancesUsageData()
+      res.status(200).json(response)
+    } catch (error) {
+      logger.error(`Error sending all active instances usage data: ${error}`)
+      next(error)
+    }
+  }
 }

@@ -2,6 +2,8 @@ import axios, { AxiosError, AxiosResponse } from 'axios'
 import { MeteringPayload } from '../../models/metering-payload.model'
 import { UsageService } from '../usage.service'
 import logger from '../../utils/logger'
+import { ServiceInstance } from '../../db/entities/service-instance.entity'
+import AppDataSource from '../../db/data-source'
 
 export class UsageServiceImpl implements UsageService {
   private usageEndpoint: string = process.env.USAGE_ENDPOINT || ''
@@ -63,6 +65,51 @@ export class UsageServiceImpl implements UsageService {
       logger.error('Error sending usage data:', error)
       throw new Error('Error sending usage data')
     }
+  }
+
+  public async sendAllActiveInstancesUsageData(): Promise<string[]> {
+    const serviceInstanceRepository =
+      AppDataSource.getRepository(ServiceInstance)
+    const activeInstances = await serviceInstanceRepository.find({
+      where: { status: 'ACTIVE' },
+    })
+
+    if (activeInstances.length === 0) {
+      logger.info('No active instances found to send usage data.')
+      return []
+    }
+
+    const results: string[] = []
+    for (const instance of activeInstances) {
+      const meteringPayload: MeteringPayload = {
+        resourceInstanceId: instance.instanceId,
+        planId: instance.planId,
+        region: instance.region,
+        start: 0, // default behavior.
+        end: 0, // default behavior.
+        measuredUsage: [
+          {
+            measure: 'INSTANCES',
+            quantity: 1,
+          },
+        ],
+      }
+
+      try {
+        const result = await this.sendUsageData(
+          instance.planId,
+          meteringPayload,
+        )
+        results.push(result)
+      } catch (error) {
+        logger.error(
+          `Error sending usage data for instance ${instance.instanceId}:`,
+          error,
+        )
+      }
+    }
+    logger.info('All active instances usage data sent successfully.')
+    return results
   }
 
   private async sendUsageDataToApi(
