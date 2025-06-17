@@ -25,6 +25,7 @@ services:
       DASHBOARD_URL: ${DASHBOARD_URL}
       CORS_URL: ${CORS_URL}
       TZ: ${TZ}
+      METERING_API_KEY: ${METERING_API_KEY}
     volumes:
       - .:/usr/src/app
       - /usr/src/app/node_modules

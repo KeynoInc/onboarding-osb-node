@@ -8,8 +8,7 @@ $requiredConfigVars = @(
     "CE_RESOURCE_GROUP",
     "CE_PROJECT",
     "CE_REGISTRY_SECRET_NAME",
-    "ICR_IMAGE",
-    "DASHBOARD_URL",
+    "ICR_IMAGE",    
     "LOG_LEVEL"
 )
 
@@ -24,12 +23,13 @@ $requiredSecretVars = @(
     "DB_CERT",
     "BROKER_BASIC_USERNAME",
     "BROKER_BASIC_PASSWORD",
+    "METERING_API_KEY",
     "BROKER_BEARER_IDENTITIES"
 )
 
 # Optional secret environment variables (warn if missing)
-$optionalSecretVars = @(
-    "METERING_API_KEY"
+$optionalVars = @(
+    "DASHBOARD_URL"
 )
 
 # Helper to get value by key from properties file and put it on environment variable
@@ -44,7 +44,7 @@ function Get-PropValuePutOnEnv($file, $key) {
 }
 
 # Read config values from file and set as env variables
-$allVariable = $requiredSecretVars + $requiredConfigVars + $optionalSecretVars
+$allVariable = $requiredSecretVars + $requiredConfigVars + $optionalVars
 foreach ($key in $allVariable) {
     Set-Variable -Name $key -Value (Get-PropValuePutOnEnv $configFile $key)
 }
@@ -108,21 +108,21 @@ else {
 }
 
 Write-Host ""
-Write-Host "---------- Checking optional secrets ----------"
+Write-Host "---------- Checking optional variables ----------"
 Write-Host ""
 
-$missingOptionalSecrets = @()
-foreach ($key in $optionalSecretVars) {
+$missingOptional = @()
+foreach ($key in $optionalVars) {
     $item = Get-Item "Env:$key"    
     if (-not $item -or $item?.Value -eq $EMPTY) {
-        $missingOptionalSecrets += $key
+        $missingOptional += $key
     } 
 }
 
-if ($missingOptionalSecrets.Count -gt 0) {
+if ($missingOptional.Count -gt 0) {
     Write-Host ""
     Write-Host "*******************************************************************************"
-    Write-Host "$($missingOptionalSecrets -join ',') were not provided!"
+    Write-Host "$($missingOptional -join ',') were not provided!"
     Write-Host "options will not be available"
     Write-Host "refer README to set values"
     Write-Host "*******************************************************************************"

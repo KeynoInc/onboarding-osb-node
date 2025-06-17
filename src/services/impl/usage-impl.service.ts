@@ -71,6 +71,7 @@ export class UsageServiceImpl implements UsageService {
     data: MeteringPayload[],
   ): Promise<AxiosResponse> {
     try {
+      logger.info('Sending usage data to API: ', url)
       const response = await axios.post(url, data, {
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -90,10 +91,10 @@ export class UsageServiceImpl implements UsageService {
   }
 
   private async getIamAccessToken(): Promise<string> {
-    const data = UsageServiceImpl.IAM_GRANT_TYPE.concat(this.apiKey)
+    const iamUrl = `${this.iamEndpoint}${UsageServiceImpl.IAM_IDENTITY_TOKEN_PATH}`
     const response = await axios.post(
-      `${this.iamEndpoint}${UsageServiceImpl.IAM_IDENTITY_TOKEN_PATH}`,
-      data,
+      iamUrl,
+      {},
       {
         headers: {
           'Content-Type': 'application/x-www-form-urlencoded',
@@ -105,7 +106,8 @@ export class UsageServiceImpl implements UsageService {
       },
     )
 
-    if (response.data && response.data.access_token) {
+    if (response?.data?.access_token) {
+      logger.info('Token retrieved successfully..')
       return response.data.access_token
     } else {
       throw new Error('Failed to retrieve IAM access token')

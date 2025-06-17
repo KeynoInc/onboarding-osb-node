@@ -11,6 +11,7 @@ import { notFoundMiddleware } from './middlewares/not-found-middleware'
 import { Authenticator } from './middlewares/authorization'
 
 import { AppRoutes } from './routes/routes'
+import { requestContextMiddleware } from './middlewares/request-context'
 
 const PORT = process.env.PORT || 3000
 
@@ -29,6 +30,8 @@ logger.info(`App Build Number: ${process.env.APP_BUILD_NUMBER}`)
 export const app = express()
 
 app.use(express.json())
+
+app.use(requestContextMiddleware)
 
 // Use logger middleware
 app.use(loggerMiddleware)
