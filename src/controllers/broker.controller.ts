@@ -98,7 +98,7 @@ export class BrokerController {
         `Update instance state response status: 202, body: ${JSON.stringify(response)}`,
       )
 
-      res.status(202).json(response)
+      res.status(200).json(response)
     } catch (error) {
       logger.error('Error updating service instance:', error)
       next(error)
@@ -196,6 +196,7 @@ export class BrokerController {
         `Deprovision Service Instance Response status: 202, body: ${JSON.stringify(response)}`,
       )
 
+      //TODO: check documentation 202 don't put the Resource in deleting.. it came back to active on IBM
       res.status(202).json(response)
     } catch (error) {
       logger.error(`Error deprovisioning service instance: ${error}`)
@@ -219,10 +220,10 @@ export class BrokerController {
       )
 
       logger.info(
-        `Update Service Instance Response status: 202, body: ${JSON.stringify(response)}`,
+        `Update Service Instance Response status: 200, body: ${JSON.stringify(response)}`,
       )
 
-      res.status(202).json(response)
+      res.status(200).json(response)
     } catch (error) {
       logger.error(`Error updating service instance: ${error}`)
       next(error)
