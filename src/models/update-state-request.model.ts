@@ -1,11 +1,23 @@
-import { IsNotEmpty, IsString, IsOptional, IsBoolean } from 'class-validator'
+import {
+  IsNotEmpty,
+  IsString,
+  IsOptional,
+  IsBoolean,
+  IsEnum,
+} from 'class-validator'
 import { Type } from 'class-transformer'
+import { ServiceInstanceStatus } from '../enums/service-instance-status'
 
 export class UpdateStateRequest {
   @IsNotEmpty()
   @IsBoolean()
   @Type(() => Boolean)
   enabled!: boolean
+
+  @IsNotEmpty()
+  @IsEnum(ServiceInstanceStatus)
+  @Type(() => String)
+  status!: string
 
   @IsOptional()
   @IsString()

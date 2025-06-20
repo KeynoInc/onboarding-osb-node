@@ -2,12 +2,23 @@ import { Router } from 'express'
 import multer from 'multer'
 import { BrokerController } from '../controllers/broker.controller'
 import { BrokerServiceImpl } from '../services/impl/broker-impl.service'
+import logger from '../utils/logger'
+import { validateBody } from '../middlewares/validateBody'
+import { UpdateStateRequest } from '../models/update-state-request.model'
 
 export class BrokerRoutes {
   static get routes(): Router {
     const router = Router()
 
     const service = new BrokerServiceImpl()
+
+    try {
+      const stringCatalog = service.importCatalogFromAssets()
+      logger.info('Catalog imported from assets successfully:', stringCatalog)
+    } catch (error) {
+      logger.error('Error importing catalog from assets:', error)
+    }
+
     const controller = new BrokerController(service)
     const upload = multer({ dest: 'uploads/' })
 
@@ -54,14 +65,15 @@ export class BrokerRoutes {
      * @returns {Promise<void>}
      * @throws {Error} In case of error
      */
-    router.put('/v2/service_instances/:instanceId', controller.provision)
+    router.put('/v2/service_instances/:instanceId(*)', controller.provision)
 
     /**
      * IBM Cloud Enablement Extension: enable service instance
      * @throws IOException
      */
     router.put(
-      '/bluemix_v1/service_instances/:instanceId',
+      '/bluemix_v1/service_instances/:instanceId(*)',
+      validateBody(UpdateStateRequest),
       controller.updateState,
     )
 
@@ -69,7 +81,10 @@ export class BrokerRoutes {
      * IBM Cloud Enablement Extension: service instance state inquiry.
      * @throws IOException
      */
-    router.get('/bluemix_v1/service_instances/:instanceId', controller.getState)
+    router.get(
+      '/bluemix_v1/service_instances/:instanceId(*)',
+      controller.getState,
+    )
     router.put(
       '/v2/service_instances/:instanceId/service_bindings/:bindingId',
       controller.bind,
@@ -86,8 +101,15 @@ export class BrokerRoutes {
      * @param {string} service_id - The service id
      * @param {boolean} accepts_incomplete - Accepts incomplete
      */
-    router.delete('/v2/service_instances/:instanceId', controller.deprovision)
-    router.patch('/v2/service_instances/:instanceId', controller.update)
+    router.delete(
+      '/v2/service_instances/:instanceId(*)',
+      controller.deprovision,
+    )
+    router.patch(
+      '/v2/service_instances/:instanceId(*)',
+      validateBody(UpdateStateRequest),
+      controller.update,
+    )
     router.get(
       '/v2/service_instances/:instanceId/last_operation',
       controller.fetchLastOperation,

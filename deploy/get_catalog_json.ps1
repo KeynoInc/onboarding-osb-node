@@ -126,5 +126,9 @@ Write-Host "Writing Converted Catalog Json To File"
 $targetFile = "src/assets/data/catalog.json"
 $main_json | ConvertTo-Json -Depth 10 | Set-Content $targetFile -Encoding utf8
 
+if (Test-Path $targetFile) {
+    Set-ItemProperty -Path $targetFile -Name IsReadOnly -Value $false
+}
+
 Write-Host "Done."
 return $true

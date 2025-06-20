@@ -95,10 +95,10 @@ export class BrokerController {
       )
 
       logger.info(
-        `Update instance state response status: 200, body: ${JSON.stringify(response)}`,
+        `Update instance state response status: 202, body: ${JSON.stringify(response)}`,
       )
 
-      res.status(200).json(response)
+      res.status(202).json(response)
     } catch (error) {
       logger.error('Error updating service instance:', error)
       next(error)
@@ -144,7 +144,7 @@ export class BrokerController {
         `Bind response status: 201, body: ${JSON.stringify(response)}`,
       )
 
-      res.status(201).json(response)
+      res.status(202).json(response)
     } catch (error) {
       logger.error(`Error binding service: ${error}`)
       next(error)
@@ -164,10 +164,10 @@ export class BrokerController {
 
       const response = {}
       logger.info(
-        `Unbind response status: 200, body: ${JSON.stringify(response)}`,
+        `Unbind response status: 202, body: ${JSON.stringify(response)}`,
       )
 
-      res.status(200).json(response)
+      res.status(202).json(response)
     } catch (error) {
       logger.error(`Error unbinding service: ${error}`)
       next(error)
@@ -193,10 +193,10 @@ export class BrokerController {
       )
 
       logger.info(
-        `Deprovision Service Instance Response status: 200, body: ${JSON.stringify(response)}`,
+        `Deprovision Service Instance Response status: 202, body: ${JSON.stringify(response)}`,
       )
 
-      res.status(200).json(response)
+      res.status(202).json(response)
     } catch (error) {
       logger.error(`Error deprovisioning service instance: ${error}`)
       next(error)
@@ -212,13 +212,17 @@ export class BrokerController {
         `Update Service Instance request received: PATCH /v2/service_instances/${instanceId}?accepts_incomplete=${acceptsIncomplete} request body: ${JSON.stringify(req.body)}`,
       )
 
-      const response = {}
-
-      logger.info(
-        `Update Service Instance Response status: 200, body: ${JSON.stringify(response)}`,
+      const response = await this.brokerService.updateState(
+        instanceId,
+        req.body,
+        BrokerUtil.getIamId(req) ?? '',
       )
 
-      res.status(200).json(response)
+      logger.info(
+        `Update Service Instance Response status: 202, body: ${JSON.stringify(response)}`,
+      )
+
+      res.status(202).json(response)
     } catch (error) {
       logger.error(`Error updating service instance: ${error}`)
       next(error)

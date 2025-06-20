@@ -2,6 +2,7 @@ import { Catalog } from '../models/catalog.model'
 import { CreateServiceInstanceResponse } from '../models/response/create-service-instance-response.model'
 import { ServiceInstanceLastOperationResponse } from '../models/response/service-instance-last-operation-response.model'
 import { ServiceInstanceStateResponse } from '../models/response/service-instance-state-response.model'
+import { UpdateStateRequest } from '../models/update-state-request.model'
 
 export interface BrokerService {
   provision(
@@ -22,10 +23,11 @@ export interface BrokerService {
     operationId: string,
   ): Promise<ServiceInstanceLastOperationResponse>
   importCatalog(file: Express.Multer.File): Promise<string>
+  importCatalogFromAssets(): string
   getCatalog(): Promise<Catalog>
   updateState(
     instanceId: string,
-    updateData: any,
+    updateData: UpdateStateRequest,
     iamId: string,
   ): Promise<ServiceInstanceStateResponse>
   getState(

@@ -31,45 +31,51 @@ export class BrokerServiceImpl implements BrokerService {
     this.catalog = new Catalog([])
   }
 
-  public async importCatalog(file: Express.Multer.File): Promise<any> {
+  public async importCatalog(file: Express.Multer.File): Promise<string> {
     const readFile = promisify(fs.readFile)
 
     try {
       const data = await readFile(file.path, { encoding: 'utf8' })
-      const catalogJson = JSON.parse(data)
 
-      if (!catalogJson.services || !Array.isArray(catalogJson.services)) {
-        throw new Error(
-          'Invalid catalog format: "services" array is missing or not an array',
-        )
-      }
-
-      const serviceDefinitions = catalogJson.services.map(
-        (service: any) =>
-          new ServiceDefinition(
-            service.id,
-            service.name,
-            service.description,
-            service.plans,
-            service.bindable,
-            service.plan_updateable,
-            service.tags,
-            service.metadata,
-            service.requires,
-            service.dashboard_client,
-          ),
-      )
-      this.catalog = new Catalog(serviceDefinitions)
-      logger.info(`Imported catalog: ${JSON.stringify(this.catalog)}`)
-
-      return catalogJson
+      return this.importCatalogFromJson(data)
     } catch (error) {
       logger.error(`Failed to import catalog: ${error}`)
       throw error
     }
   }
 
+  public importCatalogFromAssets(): string {
+    const catalogPath =
+      process.env['NODE_ENV'] === 'development'
+        ? './src/assets/data/catalog.json'
+        : './dist/assets/data/catalog.json'
+    try {
+      //TODO: Make this path configurable using environment variables
+
+      const data = fs.readFileSync(catalogPath, 'utf8')
+
+      // Remove BOM (Byte Order Mark) if present
+      // Assuming that this file is always a single service catalog
+      const cleanData = data.replace(/^\uFEFF/, '')
+      const catalogJson = JSON.parse(cleanData)
+      const serviceDefinitionsJSON = JSON.stringify({ services: [catalogJson] })
+
+      return this.importCatalogFromJson(serviceDefinitionsJSON)
+    } catch (error) {
+      logger.error(
+        `Failed to get catalog from asset path '${catalogPath}', error: '${error}'`,
+      )
+      throw error
+    }
+  }
+
   public async getCatalog(): Promise<Catalog> {
+    if (!this.catalog || !this.catalog.getServiceDefinitions().length) {
+      logger.warn('Catalog is empty, importing from assets...')
+      this.importCatalogFromAssets()
+    } else {
+      logger.info('Catalog already loaded, returning existing catalog.')
+    }
     return this.catalog
   }
 
@@ -149,7 +155,24 @@ export class BrokerServiceImpl implements BrokerService {
       const serviceInstanceRepository =
         AppDataSource.getRepository(ServiceInstance)
 
-      await serviceInstanceRepository.delete({ instanceId })
+      const serviceInstance = await serviceInstanceRepository.findOne({
+        where: { instanceId },
+      })
+      if (!serviceInstance) {
+        throw new Error(`Service instance with ID ${instanceId} not found`)
+      }
+
+      logger.info(`Deprovisioning service instance with ID: ${instanceId}`)
+      await serviceInstanceRepository
+        .merge(serviceInstance, {
+          status: ServiceInstanceStatus.DEPROVISIONING,
+          updateDate: new Date(),
+        })
+        .save()
+
+      logger.info(
+        `Service instance with ID: ${instanceId} marked as DEPROVISIONING`,
+      )
       return true
     } catch (error) {
       logger.error('Error deprovisioning service instance:', error)
@@ -222,18 +245,33 @@ export class BrokerServiceImpl implements BrokerService {
 
   public async updateState(
     instanceId: string,
-    json: any,
+    updateStateRequest: UpdateStateRequest,
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     iamId: string,
   ): Promise<any> {
     try {
-      const updateStateRequest: UpdateStateRequest = JSON.parse(
-        JSON.stringify(json),
-      )
+      const serviceInstanceRepository =
+        AppDataSource.getRepository(ServiceInstance)
+      const serviceInstance = await serviceInstanceRepository.findOne({
+        where: { instanceId },
+      })
+
+      if (!serviceInstance) {
+        throw new Error(`Service instance with ID ${instanceId} not found`)
+      }
+
+      await serviceInstanceRepository
+        .merge(serviceInstance, {
+          enabled: updateStateRequest.enabled,
+          status: updateStateRequest.status,
+          updateDate: new Date(),
+        })
+        .save()
 
       const response: ServiceInstanceStateResponse = {
         active: updateStateRequest.enabled || false,
         enabled: updateStateRequest.enabled || false,
+        status: updateStateRequest.status || ServiceInstanceStatus.PROCESSING,
       }
 
       return response
@@ -257,6 +295,10 @@ export class BrokerServiceImpl implements BrokerService {
       const serviceInstance = await serviceInstanceRepository.findOne({
         where: { instanceId },
       })
+
+      if (!serviceInstance) {
+        throw new Error(`Service instance with ID ${instanceId} not found`)
+      }
 
       const response: ServiceInstanceStateResponse = {
         active: serviceInstance?.status === ServiceInstanceStatus.ACTIVE,
@@ -291,5 +333,43 @@ export class BrokerServiceImpl implements BrokerService {
     instance.updateDate = new Date()
 
     return instance
+  }
+
+  private importCatalogFromJson(jsonString: string): string {
+    try {
+      const clean = jsonString.replace(/^\uFEFF/, '')
+      const catalogJson = JSON.parse(clean)
+
+      if (!catalogJson.services || !Array.isArray(catalogJson.services)) {
+        throw new Error(
+          'importCatalogFromJson: Invalid catalog format: "services" array is missing or not an array',
+        )
+      }
+
+      const serviceDefinitions = catalogJson.services.map(
+        (service: any) =>
+          new ServiceDefinition(
+            service.id,
+            service.name,
+            service.description,
+            service.plans,
+            service.bindable,
+            service.plan_updateable,
+            service.tags,
+            service.metadata,
+            service.requires,
+            service.dashboard_client,
+          ),
+      )
+      this.catalog = new Catalog(serviceDefinitions)
+      logger.info(
+        `importCatalogFromJson: Imported catalog: ${JSON.stringify(this.catalog)}`,
+      )
+
+      return catalogJson
+    } catch (error) {
+      logger.error(`importCatalogFromJson: Failed to import catalog: ${error}`)
+      throw error
+    }
   }
 }
