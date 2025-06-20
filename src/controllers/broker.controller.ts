@@ -257,9 +257,12 @@ export class BrokerController {
         `last_operation Response status: 200, body: ${JSON.stringify(response)}`,
       )
 
-      //TODO: implement the 410 for the case when the instance is not found should happen in our case because our deprovision is async
+      let statusCode = 200
+      if (!response.state) {
+        statusCode = 410 // Gone
+      }
 
-      res.status(200).json(response)
+      res.status(statusCode).json(response)
     } catch (error) {
       logger.error(`Error fetching last operation:`, error)
       next(error)

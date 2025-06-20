@@ -222,6 +222,13 @@ export class BrokerServiceImpl implements BrokerService {
 
       logger.info(`Service instance found: ${JSON.stringify(serviceInstance)}`)
 
+      if (serviceInstance.status === ServiceInstanceStatus.DEPROVISIONED) {
+        logger.info(
+          `Service instance with ID ${instanceId} is already deprovisioned`,
+        )
+        return {}
+      }
+
       let operationState = OperationState.IN_PROGRESS
 
       if (serviceInstance.status === ServiceInstanceStatus.ACTIVE) {
@@ -230,7 +237,7 @@ export class BrokerServiceImpl implements BrokerService {
         operationState = OperationState.FAILED
       }
 
-      const description = `Operation for instance ${instanceId} is in state: ${operationState}`
+      const description = `Operation for instance ${instanceId} is in state: ${serviceInstance.status}`
       logger.info(description)
 
       const response = {
