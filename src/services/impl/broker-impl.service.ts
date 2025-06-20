@@ -230,12 +230,12 @@ export class BrokerServiceImpl implements BrokerService {
         operationState = OperationState.FAILED
       }
 
-      logger.info(
-        `Operation state for instance ${instanceId}: ${operationState}`,
-      )
+      const description = `Operation for instance ${instanceId} is in state: ${operationState}`
+      logger.info(description)
 
       const response = {
         [BrokerServiceImpl.INSTANCE_STATE]: operationState,
+        description,
       }
       return response
     } catch (error) {
