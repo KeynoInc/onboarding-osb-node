@@ -4,7 +4,8 @@ import { UsageService } from '../usage.service'
 import logger from '../../utils/logger'
 import { ServiceInstance } from '../../db/entities/service-instance.entity'
 import AppDataSource from '../../db/data-source'
-import { ServiceInstanceStatus } from '../../enums/service-instance-status'
+import { ServiceInstanceUsage } from '../../db/entities/service-instance-usage.entity'
+import { plainToInstance } from 'class-transformer'
 
 export class UsageServiceImpl implements UsageService {
   private usageEndpoint: string = process.env.USAGE_ENDPOINT || ''
@@ -45,14 +46,28 @@ export class UsageServiceImpl implements UsageService {
 
       if (response.status === 202) {
         const responseJson = response.data.resources
-        responseJson.forEach((resp: any) => {
+        for (const resp of responseJson) {
           if (resp.status && resp.status !== 201) {
             logger.error(
               'ALERT: Error response from Metering Usage API:',
               JSON.stringify(resp),
             )
+          } else {
+            const serviceInstanceUsageRepository =
+              AppDataSource.getRepository(ServiceInstanceUsage)
+            const serviceInstanceUsage = new ServiceInstanceUsage()
+            serviceInstanceUsage.instanceId =
+              meteringPayload.resource_instance_id
+            serviceInstanceUsage.statusCode = 202 // Accepted
+            serviceInstanceUsage.checkStatusPartialUrl = resp.location
+            serviceInstanceUsage.createDate = new Date()
+            serviceInstanceUsage.updateDate = new Date()
+            await serviceInstanceUsageRepository.save(serviceInstanceUsage)
+            logger.info(
+              `Usage data for instance ${meteringPayload.resource_instance_id} saved successfully.`,
+            )
           }
-        })
+        }
         return JSON.stringify(responseJson)
       } else {
         logger.error(
@@ -69,28 +84,69 @@ export class UsageServiceImpl implements UsageService {
   }
 
   public async sendAllActiveInstancesUsageData(): Promise<string[]> {
-    const serviceInstanceRepository =
-      AppDataSource.getRepository(ServiceInstance)
-    const activeInstances = await serviceInstanceRepository.find({
-      where: { status: ServiceInstanceStatus.ACTIVE },
-    })
+    const sendActiveInstancesUsageDataResult =
+      await this.sendActiveInstancesUsageData()
 
-    if (activeInstances.length === 0) {
+    const checkServiceInstanceUsageResult =
+      await this.checkServiceInstanceUsage()
+
+    return sendActiveInstancesUsageDataResult.concat(
+      checkServiceInstanceUsageResult,
+    )
+  }
+
+  private async sendActiveInstancesUsageData(): Promise<string[]> {
+    const rawData = await AppDataSource.query(`
+        SELECT si.*
+        FROM service_instance si
+        LEFT JOIN (
+          SELECT DISTINCT instance_id
+          FROM service_instance_usage
+          WHERE status_code IN (200, 201, 202)
+            AND create_date >= DATE_TRUNC('month', CURRENT_DATE)
+            AND create_date < DATE_TRUNC('month', CURRENT_DATE) + INTERVAL '1 month'
+        ) siu_curr
+          ON siu_curr.instance_id = si.instance_id
+        WHERE si.status = 'ACTIVE'
+          AND siu_curr.instance_id IS NULL`)
+
+    const activeInstancesThisMonth: ServiceInstance[] = rawData.map(
+      (data: any) =>
+        plainToInstance<ServiceInstance, any>(ServiceInstance, {
+          id: data.id,
+          createDate: new Date(data.create_date),
+          updateDate: new Date(data.update_date),
+          version: data.version,
+          instanceId: data.instance_id,
+          name: data.name,
+          iamId: data.iam_id,
+          planId: data.plan_id,
+          serviceId: data.service_id,
+          enabled: data.enabled === 1,
+          region: data.region,
+          context: data.context,
+          parameters: data.parameters,
+          status: data.status,
+        }),
+    )
+
+    if (activeInstancesThisMonth.length === 0) {
       logger.info('No active instances found to send usage data.')
       return []
     }
 
     const results: string[] = []
-    for (const instance of activeInstances) {
-      const meteringPayload: MeteringPayload = {
-        resourceInstanceId: instance.instanceId,
-        planId: instance.planId,
+    for (const instance of activeInstancesThisMonth) {
+      const startEndTime = new Date().getTime()
+      const instanceMeteringPayload: MeteringPayload = {
+        resource_instance_id: instance.instanceId,
+        plan_id: instance.planId,
         region: instance.region,
-        start: 0, // default behavior.
-        end: 0, // default behavior.
-        measuredUsage: [
+        start: startEndTime, // default behavior.
+        end: startEndTime, // default behavior.
+        measured_usage: [
           {
-            measure: 'INSTANCES',
+            measure: 'INSTANCE',
             quantity: 1,
           },
         ],
@@ -98,8 +154,8 @@ export class UsageServiceImpl implements UsageService {
 
       try {
         const result = await this.sendUsageData(
-          instance.planId,
-          meteringPayload,
+          instance.serviceId,
+          instanceMeteringPayload,
         )
         results.push(result)
       } catch (error) {
@@ -111,6 +167,69 @@ export class UsageServiceImpl implements UsageService {
     }
     logger.info('All active instances usage data sent successfully.')
     return results
+  }
+
+  private async checkServiceInstanceUsage(): Promise<string> {
+    const serviceInstanceUsageRepository =
+      AppDataSource.getRepository(ServiceInstanceUsage)
+
+    const pendingServiceInstanceUsage =
+      await serviceInstanceUsageRepository.find({
+        where: {
+          statusCode: 202,
+        },
+      })
+
+    const iamAccessToken = await this.getIamAccessToken()
+
+    for (const usage of pendingServiceInstanceUsage) {
+      const result = await this.getServiceInstanceUsageStatus(
+        iamAccessToken,
+        usage,
+      )
+
+      usage.statusCode = result.statusCode
+      usage.statusResponse = result.statusResponse
+      usage.updateDate = new Date()
+
+      await serviceInstanceUsageRepository.save(usage)
+    }
+
+    return JSON.stringify(pendingServiceInstanceUsage)
+  }
+
+  private async getServiceInstanceUsageStatus(
+    token: string,
+    serviceInstanceUsage: ServiceInstanceUsage,
+  ): Promise<{ statusCode: number; statusResponse: Record<string, any> }> {
+    try {
+      const url = this.usageEndpoint.concat(
+        serviceInstanceUsage.checkStatusPartialUrl,
+      )
+      logger.info('Sending usage data to API: ', url)
+      const response = await axios.get(url, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      })
+      logger.info(
+        `Usage status code: ${response.status} -- data: ${JSON.stringify(response.data)}`,
+      )
+      const details = response.data?.details ?? {}
+      return {
+        statusCode: details.state === 'rated' ? 200 : 202,
+        statusResponse: details,
+      }
+    } catch (error) {
+      const axiosError = error as AxiosError
+
+      if (axiosError.response) {
+        logger.error('Failed with status:', axiosError.response.status)
+        logger.error('Failed with response:', axiosError.response.data)
+      }
+      throw error
+    }
   }
 
   private async sendUsageDataToApi(

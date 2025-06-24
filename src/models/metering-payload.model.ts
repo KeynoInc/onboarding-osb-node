@@ -3,10 +3,10 @@ import { MeasuredUsage } from './measured-usage.model'
 
 export class MeteringPayload {
   @IsNotEmpty()
-  planId: string
+  plan_id: string
 
   @IsNotEmpty()
-  resourceInstanceId: string
+  resource_instance_id: string
 
   @IsNotEmpty()
   start: number
@@ -18,7 +18,7 @@ export class MeteringPayload {
   region: string
 
   @IsNotEmpty()
-  measuredUsage: MeasuredUsage[]
+  measured_usage: MeasuredUsage[]
 
   constructor(
     planId: string,
@@ -28,15 +28,15 @@ export class MeteringPayload {
     region: string,
     measuredUsage: MeasuredUsage[],
   ) {
-    this.planId = planId
-    this.resourceInstanceId = resourceInstanceId
+    this.plan_id = planId
+    this.resource_instance_id = resourceInstanceId
     this.start = start
     this.end = end
     this.region = region
-    this.measuredUsage = measuredUsage
+    this.measured_usage = measuredUsage
   }
 
   toString(): string {
-    return `MeteringPayload{planId='${this.planId}', instanceId='${this.resourceInstanceId}', startTime='${this.start}', endTime=${this.end}, MeasuredUsage=${JSON.stringify(this.measuredUsage)}}`
+    return `MeteringPayload{planId='${this.plan_id}', instanceId='${this.resource_instance_id}', startTime='${this.start}', endTime=${this.end}, MeasuredUsage=${JSON.stringify(this.measured_usage)}}`
   }
 }
