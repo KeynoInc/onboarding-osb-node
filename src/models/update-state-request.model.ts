@@ -17,7 +17,7 @@ export class UpdateStateRequest {
   @IsNotEmpty()
   @IsEnum(ServiceInstanceStatus)
   @Type(() => String)
-  status!: string
+  status!: ServiceInstanceStatus
 
   @IsOptional()
   @IsString()

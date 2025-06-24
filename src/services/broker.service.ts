@@ -1,3 +1,4 @@
+import { ServiceInstanceStatus } from '../enums/service-instance-status'
 import { Catalog } from '../models/catalog.model'
 import { CreateServiceInstanceResponse } from '../models/response/create-service-instance-response.model'
 import { ServiceInstanceLastOperationResponse } from '../models/response/service-instance-last-operation-response.model'
@@ -16,7 +17,7 @@ export interface BrokerService {
     planId: string,
     serviceId: string,
     iamId: string,
-  ): Promise<boolean>
+  ): Promise<ServiceInstanceStatus | null>
   lastOperation(
     instanceId: string,
     iamId: string,

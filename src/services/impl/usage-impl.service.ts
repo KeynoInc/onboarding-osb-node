@@ -4,6 +4,7 @@ import { UsageService } from '../usage.service'
 import logger from '../../utils/logger'
 import { ServiceInstance } from '../../db/entities/service-instance.entity'
 import AppDataSource from '../../db/data-source'
+import { ServiceInstanceStatus } from '../../enums/service-instance-status'
 
 export class UsageServiceImpl implements UsageService {
   private usageEndpoint: string = process.env.USAGE_ENDPOINT || ''
@@ -71,7 +72,7 @@ export class UsageServiceImpl implements UsageService {
     const serviceInstanceRepository =
       AppDataSource.getRepository(ServiceInstance)
     const activeInstances = await serviceInstanceRepository.find({
-      where: { status: 'ACTIVE' },
+      where: { status: ServiceInstanceStatus.ACTIVE },
     })
 
     if (activeInstances.length === 0) {

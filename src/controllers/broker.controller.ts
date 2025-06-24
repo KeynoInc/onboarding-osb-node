@@ -185,7 +185,17 @@ export class BrokerController {
         `Deprovision Service Instance request received: DELETE /v2/service_instances/${instanceId}?accepts_incomplete=${acceptsIncomplete}&plan_id=${planId}&service_id=${serviceId}`,
       )
 
-      const response = await this.brokerService.deprovision(
+      if (!acceptsIncomplete) {
+        logger.warn('Accepts Incomplete is not set to true.')
+        res.status(422).json({
+          error: 'AsyncRequired',
+          description:
+            'This service plan requires client support for asynchronous service operations.',
+        })
+        return
+      }
+
+      const serviceInstanceStatus = await this.brokerService.deprovision(
         instanceId,
         planId,
         serviceId,
@@ -193,11 +203,21 @@ export class BrokerController {
       )
 
       logger.info(
-        `Deprovision Service Instance Response status: 202, body: ${JSON.stringify(response)}`,
+        `Deprovision Service Instance Response status: ${JSON.stringify(serviceInstanceStatus)}`,
       )
 
-      //TODO: check documentation 202 don't put the Resource in deleting.. it came back to active on IBM
-      res.status(202).json(response)
+      let statusCode = 202
+      if (serviceInstanceStatus === 'DEPROVISIONED') {
+        statusCode = 200 // OK
+      } else if (serviceInstanceStatus == null) {
+        statusCode = 410 // Gone
+      }
+
+      logger.info(
+        `Deprovision Service Instance Response service status: ${JSON.stringify(serviceInstanceStatus)} status code: ${statusCode}`,
+      )
+
+      res.status(statusCode).json({})
     } catch (error) {
       logger.error(`Error deprovisioning service instance: ${error}`)
       next(error)

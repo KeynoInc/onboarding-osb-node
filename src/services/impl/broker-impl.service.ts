@@ -150,7 +150,9 @@ export class BrokerServiceImpl implements BrokerService {
     }
   }
 
-  public async deprovision(instanceId: string): Promise<boolean> {
+  public async deprovision(
+    instanceId: string,
+  ): Promise<ServiceInstanceStatus | null> {
     try {
       const serviceInstanceRepository =
         AppDataSource.getRepository(ServiceInstance)
@@ -159,7 +161,11 @@ export class BrokerServiceImpl implements BrokerService {
         where: { instanceId },
       })
       if (!serviceInstance) {
-        throw new Error(`Service instance with ID ${instanceId} not found`)
+        return null
+      }
+
+      if (serviceInstance.status !== ServiceInstanceStatus.ACTIVE) {
+        return serviceInstance.status
       }
 
       logger.info(`Deprovisioning service instance with ID: ${instanceId}`)
@@ -173,7 +179,7 @@ export class BrokerServiceImpl implements BrokerService {
       logger.info(
         `Service instance with ID: ${instanceId} marked as DEPROVISIONING`,
       )
-      return true
+      return ServiceInstanceStatus.DEPROVISIONING
     } catch (error) {
       logger.error('Error deprovisioning service instance:', error)
       throw new Error('Error deprovisioning service instance')

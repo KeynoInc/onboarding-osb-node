@@ -1,5 +1,6 @@
 import { Entity, Column, PrimaryColumn } from 'typeorm'
 import { BaseEntity } from './base.entity'
+import { ServiceInstanceStatus } from '../../enums/service-instance-status'
 
 @Entity({ name: 'service_instance' })
 export class ServiceInstance extends BaseEntity {
@@ -18,8 +19,8 @@ export class ServiceInstance extends BaseEntity {
   @Column({ name: 'service_id', nullable: true })
   serviceId!: string
 
-  @Column({ nullable: true })
-  status!: string
+  @Column({ type: 'enum', nullable: true, enum: ServiceInstanceStatus })
+  status!: ServiceInstanceStatus
 
   @Column({ default: false })
   enabled!: boolean

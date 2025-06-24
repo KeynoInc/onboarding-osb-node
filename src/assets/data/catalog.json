@@ -817,7 +817,7 @@
               "usage_cap_qty": 0,
               "display_cap": 0,
               "effective_from": "2025-06-01T00:00:00Z",
-              "effective_until": "9999-12-31T00:00:00Z",
+              "effective_until": "2025-06-30T23:59:59.999Z",
               "additional_properties": {
                 "included_quantities": {
                   "account": 0,
@@ -1494,7 +1494,7 @@
               "usage_cap_qty": 0,
               "display_cap": 0,
               "effective_from": "2025-06-01T00:00:00Z",
-              "effective_until": "9999-12-31T00:00:00Z",
+              "effective_until": "2025-06-30T23:59:59.999Z",
               "additional_properties": {
                 "included_quantities": {
                   "account": 0,
@@ -2171,7 +2171,7 @@
               "usage_cap_qty": 0,
               "display_cap": 0,
               "effective_from": "2025-06-01T00:00:00Z",
-              "effective_until": "9999-12-31T00:00:00Z",
+              "effective_until": "2025-06-30T23:59:59.999Z",
               "additional_properties": {
                 "included_quantities": {
                   "account": 0,
@@ -2848,7 +2848,7 @@
               "usage_cap_qty": 0,
               "display_cap": 0,
               "effective_from": "2025-06-01T00:00:00Z",
-              "effective_until": "9999-12-31T00:00:00Z",
+              "effective_until": "2025-06-30T23:59:59.999Z",
               "additional_properties": {
                 "included_quantities": {
                   "account": 0,
